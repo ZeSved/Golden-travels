@@ -1,0 +1,34 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+
+  color: #ffffff;
+  font-family: 'Inter', sans-serif;
+}
+
+*:disabled {
+  opacity: 50%;
+  cursor: default;
+}
+
+:root {
+  --primary: #131313;
+  --secondary: #1c1c1c;
+  --text: #ffffff;
+
+  --main-gold: #FFD700;
+  --light-gold: #FFF8BC;
+
+  --gradient: linear-gradient(10deg, var(--main-gold) 0%, var(--light-gold) 50%, var(--main-gold) 100%);
+}
+
+span.golden {
+  background: var(--gradient);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
