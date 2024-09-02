@@ -11,7 +11,7 @@ body {
   align-items: center;
 
   width: 100%;
-  aspect-ratio: 2 / 1;
+  aspect-ratio: 2.5 / 1.1;
 
   position: relative;
 
@@ -27,7 +27,7 @@ body {
     z-index: -1;
 
     width: 100%;
-    aspect-ratio: 2.5 / 1;
+    aspect-ratio: 2.5 / 1.1;
 
     top: 50%;
     left: 50%;
@@ -37,10 +37,72 @@ body {
   }
 }
 
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40vh;
+  margin-top: 60vh;
+  margin-bottom: 15vh;
+  width: 100%;
+
+  section {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    width: fit-content;
+    max-width: 80vw;
+    padding: 1rem;
+    /* background-color: var(--secondary); */
+
+    div {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      h2 {
+        /* font-size: var(--h-text-size); */
+        width: 90%;
+      }
+
+      p {
+        /* font-size: var(--p-text-size); */
+        width: 90%;
+      }
+    }
+
+    img {
+      width: 30vw;
+      aspect-ratio: 1.52 / 1;
+    }
+
+    /* &#first {
+      padding-right: 3.5rem;
+      margin-left: auto;
+    } */
+
+    &#second {
+      flex-direction: row-reverse;
+      /* padding-left: 3.5rem;
+      margin-right: auto; */
+
+      div>p,
+      div>h2 {
+        text-align: right;
+        margin-left: auto;
+      }
+    }
+  }
+}
+
 footer {
   display: flex;
   justify-content: space-around;
   align-items: center;
+
+  padding-block: 1rem;
+
+  height: fit-content;
 
   background-color: var(--secondary);
 
@@ -75,4 +137,16 @@ footer {
   img {
     width: 25vw;
   }
+}
+
+svg {
+  position: absolute;
+  top: 93%;
+  left: 5%;
+  z-index: -1;
+
+  /* stroke-dashoffset: 1000; */
+
+  width: 70%;
+  height: 215%;
 }

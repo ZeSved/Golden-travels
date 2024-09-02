@@ -21,6 +21,9 @@
   --secondary: #1c1c1c;
   --text: #ffffff;
 
+  --h-text-size: calc(32px * 1.5);
+  --p-text-size: calc(16px * 1.5);
+
   --main-gold: #FFD700;
   --light-gold: #FFF8BC;
 
