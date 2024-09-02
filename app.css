@@ -95,11 +95,41 @@ main {
   }
 }
 
+#destinations {
+  margin-inline: auto;
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  gap: 9vw;
+
+  padding-bottom: 2rem;
+
+  p {
+    font-size: 2rem;
+    font-weight: bold;
+    background-color: var(--primary);
+    padding-inline: 1rem;
+  }
+
+  button {
+    border: none;
+    outline: none;
+    background-color: white;
+    color: black;
+    padding: .5rem 1rem;
+    font-size: 1.8rem;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 8px;
+  }
+}
+
 footer {
   display: flex;
   justify-content: space-around;
   align-items: center;
 
+  margin-top: 15vh;
   padding-block: 1rem;
 
   height: fit-content;
@@ -139,14 +169,47 @@ footer {
   }
 }
 
+@keyframes grow {
+  from {
+    transform: scaleY(0);
+  }
+
+  to {
+    transform: scaleY(1);
+  }
+}
+
+#decoration-bar-border,
+#decoration-bar {
+  position: fixed;
+  top: 8vh;
+  left: 4rem;
+  height: 80vh;
+  width: 5px;
+}
+
+#decoration-bar-border {
+  border: 2px dashed white;
+}
+
+#decoration-bar {
+  transform-origin: 50% 0;
+  animation: grow auto linear;
+  animation-timeline: --scroll;
+  background-color: white;
+}
+
 svg {
   position: absolute;
-  top: 93%;
-  left: 5%;
+  top: 85vh;
+  top: 85dvh;
+  left: -5%;
   z-index: -1;
 
   /* stroke-dashoffset: 1000; */
 
-  width: 70%;
-  height: 215%;
+  width: 100%;
+  height: 200%;
+  aspect-ratio: 0.8 / 2;
+  margin-inline: auto;
 }

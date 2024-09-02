@@ -16,6 +16,10 @@
   cursor: default;
 }
 
+html {
+  scroll-timeline: --scroll block;
+}
+
 :root {
   --primary: #131313;
   --secondary: #1c1c1c;
