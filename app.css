@@ -53,6 +53,7 @@ main {
     width: fit-content;
     max-width: 80vw;
     padding: 1rem;
+    /* transform: scaleX(0.9) perspective(1000px) rotateX(45deg); */
     /* background-color: var(--secondary); */
 
     div {
@@ -72,8 +73,15 @@ main {
     }
 
     img {
+      position: relative;
       width: 30vw;
       aspect-ratio: 1.52 / 1;
+      border-radius: 8px;
+      transition: all 200ms;
+
+      &:hover {
+        transform: scale(1.1, 1.1) rotateZ(8deg);
+      }
     }
 
     /* &#first {
@@ -214,6 +222,8 @@ svg {
   height: fit-content;
   /* aspect-ratio: 0.8 / 2; */
   margin-inline: auto;
+
+  transform: scale3d(2, 0.5, 1);
 
   >path {
     height: fit-content;
