@@ -5,18 +5,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="app.css">
-  <script type="module" src="env.js" defer></script>
+  <script type="module" src="main.js" defer></script>
   <title>Document</title>
 </head>
 
 <body>
+  <header>
+    <a href="/"><img id="logo" src="images/logo.png" alt=""></a>
+    <a href="about/">About</a><a href="destinations/">Destinations</a><a href="history/">My history</a>
+  </header>
   <div id="hero">
     <img id="logo" src="images/logo.png" alt="">
     <h2 id="motto">The best agency for your first <span class="golden">international</span> journey</h2>
     <img id="hero-img" src="images/africa-best-places-to-visit-experience-victoria-falls-zimbabwe-zambia.jpg" alt="">
   </div>
   <main>
-    <section id="first">
+    <section id="first-section" class="slide-out">
       <div>
         <h2>Why watch a documentary when you can see it with <span class="golden">your own eyes?</span></h2>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam quasi atque dolorum consequatur corporis
@@ -25,7 +29,7 @@
       </div>
       <img src="images/Chichen-750x400.webp" alt="">
     </section>
-    <section id="second">
+    <section id="second-section" class="slide-out">
       <div>
         <h2>Afraid you will miss anything? Don&apos;t worry! We <span class="golden">take care of everything</span> for
           you.</h2>
@@ -37,7 +41,7 @@
   </main>
   <div id="destinations">
     <p>Your dream <span class="golden">adventure</span> starts here</p>
-    <a href="journey/">See destinations</a>
+    <a href="destinations/">See destinations</a>
   </div>
   <footer>
     <div id="contact">

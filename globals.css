@@ -18,6 +18,7 @@
 
 html {
   scroll-timeline: --scroll block;
+  overflow-x: hidden;
 }
 
 :root {
@@ -38,4 +39,11 @@ span.golden {
   background: var(--gradient);
   background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+a:not(:has(img)) {
+  padding: .5rem 1rem;
+  border: 2px solid white;
+  border-radius: 100vh;
+  text-decoration: none;
 }
