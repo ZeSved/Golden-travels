@@ -5,14 +5,62 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script type="module" src="destinations.js" defer></script>
+  <link rel="stylesheet" href="style.css">
   <title>Document</title>
 </head>
 
 <body>
-  <h1>test to make sure atleast this works</h1>
-  <iframe id="google-map" width="450" height="250" frameborder="0" style="border:0"
-    referrerpolicy="no-referrer-when-downgrade" src="" allowfullscreen>
-  </iframe>
+  <header id="nav-bar">
+    <a href="/"><img id="logo" src="../meta-images/Group 1.png" alt=""></a>
+    <a href="about/">About</a><a href="destinations/">Destinations</a><a href="history/">My history</a>
+  </header>
+  <h1>Choose location</h1>
+  <div id="step-indicator">
+    <button>Previous</button>
+    <div class="current-step">
+      <p>1</p>
+    </div>
+    <div class="bar"></div>
+    <div class="current-step">
+      <p>2</p>
+    </div>
+    <div class="bar"></div>
+    <div class="current-step">
+      <p>3</p>
+    </div>
+    <button>Next</button>
+  </div>
+  <main>
+    <iframe id="city-map" frameborder="0" style="border:0" referrerpolicy="no-referrer-when-downgrade" src=""
+      allowfullscreen>
+    </iframe>
+    <div id="location-input">
+      <div class="selection">
+        <h3>City</h3>
+        <input type="text">
+      </div>
+      <div class="selection">
+        <h3>Hotel</h3>
+        <input type="text">
+      </div>
+    </div>
+    <iframe id="hotel-map" frameborder="0" style="border:0" referrerpolicy="no-referrer-when-downgrade" src=""
+      allowfullscreen>
+    </iframe>
+  </main>
+  <footer>
+    <div id="contact">
+      <h2>Contact</h2>
+      <p class="p1">+46 73 757 47 55</p>
+      <p class="p2">golden@travel.com</p>
+      <p class="p3">34st golden street 16795</p>
+    </div>
+    <img src="../meta-images/logo.png" alt="">
+    <div id="creator">
+      <h2>Creator</h2>
+      <p>Timothy Korell</p>
+    </div>
+  </footer>
 </body>
 
 </html>

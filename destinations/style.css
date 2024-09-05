@@ -1,0 +1,47 @@
+@import '../globals.css';
+
+h1 {
+  width: 50vw;
+  font-size: 5rem;
+  margin: 15vh auto;
+  text-align: center;
+}
+
+#step-indicator {
+  display: flex;
+  width: 100%;
+
+  .bar {
+    width: 30%;
+  }
+}
+
+main {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-inline: 1rem;
+  width: 100%;
+
+  iframe {
+    width: 33%;
+    aspect-ratio: 3 / 2;
+    border-radius: 8px;
+  }
+
+  #location-input {
+    height: 30vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    div {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}
