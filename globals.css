@@ -16,6 +16,12 @@
   cursor: default;
 }
 
+button {
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
 html {
   overflow-x: hidden;
 }
