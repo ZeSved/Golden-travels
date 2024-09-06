@@ -16,7 +16,7 @@
   </header>
   <h1>Choose location</h1>
   <div id="step-indicator">
-    <button id="previous">Previous</button>
+    <button id="previous"><img src="../meta-images/left arrow.png" alt=""></button>
     <div text="1" class="step active" id="step1">
       <p>1</p>
     </div>
@@ -28,22 +28,22 @@
     <div text="3" class="step" id="step3">
       <p>3</p>
     </div>
-    <button id="next">Next</button>
+    <button id="next"><img src="../meta-images/right arrow.png" alt=""></button>
   </div>
   <main>
     <iframe id="city-map" frameborder="0" style="border:0" referrerpolicy="no-referrer-when-downgrade" src=""
       allowfullscreen>
     </iframe>
-    <div id="location-input">
+    <form id="location-input">
       <div class="selection">
         <h3>City</h3>
-        <input type="text">
+        <input id="city-input" type="text">
       </div>
       <div class="selection">
         <h3>Hotel</h3>
-        <input type="text">
+        <input id="hotel-input" type="text">
       </div>
-    </div>
+    </form>
     <iframe id="hotel-map" frameborder="0" style="border:0" referrerpolicy="no-referrer-when-downgrade" src=""
       allowfullscreen>
     </iframe>

@@ -1,5 +1,7 @@
 const cityMap = document.getElementById('city-map')
 const hotelMap = document.getElementById('hotel-map')
+const cityInput = document.getElementById('city-input')
+const hotelInput = document.getElementById('hotel-input')
 
 const next = document.getElementById('next')
 const previous = document.getElementById('previous')
@@ -12,16 +14,27 @@ const step3 = document.getElementById('step3')
 
 const currentlyActive = ['step1']
 
-cityMap.src = `https://www.google.com/maps/embed/v1/place?key=AIzaSyBJJNyhCEg8sxLsO6YMZ-GMFTT-c5-Cz_Q&q=Stockholm+Sweden`
-hotelMap.src = `https://www.google.com/maps/embed/v1/place?key=AIzaSyBJJNyhCEg8sxLsO6YMZ-GMFTT-c5-Cz_Q&q=Grand+Hotel,Stockholm+Sweden`
+const FORWARD_ANIMATION_DELAY = 600
+const BACK_ANIMATION_DELAY = FORWARD_ANIMATION_DELAY + 100
 
-next.addEventListener('click', () => {
-	handleTransition(true)
-})
+next.addEventListener('click', () => handleTransition(true))
+previous.addEventListener('click', () => handleTransition(false))
 
-previous.addEventListener('click', () => {
-	handleTransition(false)
-})
+cityInput.addEventListener('change', (e) => updateMaps(e, 'city'))
+hotelInput.addEventListener('change', (e) => updateMaps(e, 'hotel'))
+
+cityMap.src = `https://www.google.com/maps/embed/v1/place?key=AIzaSyBJJNyhCEg8sxLsO6YMZ-GMFTT-c5-Cz_Q&q=stockholm`
+hotelMap.src = `https://www.google.com/maps/embed/v1/place?key=AIzaSyBJJNyhCEg8sxLsO6YMZ-GMFTT-c5-Cz_Q&q=grand+hotel`
+
+function updateMaps(e, map) {
+	console.log('runs')
+	;(map === 'city'
+		? cityMap
+		: hotelMap
+	).src = `https://www.google.com/maps/embed/v1/place?key=AIzaSyBJJNyhCEg8sxLsO6YMZ-GMFTT-c5-Cz_Q&q=${e.target.value
+		.trim()
+		.replaceAll(' ', '+')}`
+}
 
 function handleTransition(goToNext) {
 	if (goToNext) {
@@ -29,23 +42,23 @@ function handleTransition(goToNext) {
 			toggleClassnames(bar1, 'active', 'unactive')
 			toggleClassnames(step2, 'active', 'unactive')
 			currentlyActive.push('bar1', 'step2')
-			setTimeout(() => conicGradient(true, step2), 600)
+			setTimeout(() => conicGradient(true, step2), FORWARD_ANIMATION_DELAY)
 		} else if (currentlyActive.length === 3) {
 			toggleClassnames(bar2, 'active', 'unactive')
 			toggleClassnames(step3, 'active', 'unactive')
 			currentlyActive.push('bar2', 'step3')
-			setTimeout(() => conicGradient(true, step3), 600)
+			setTimeout(() => conicGradient(true, step3), FORWARD_ANIMATION_DELAY)
 		}
 	} else {
 		if (currentlyActive.length === 5) {
 			conicGradient(false, step3)
-			toggleClassnames(bar2, 'unactive', 'active')
-			toggleClassnames(step3, 'unactive', 'active')
+			setTimeout(() => toggleClassnames(bar2, 'unactive', 'active'), BACK_ANIMATION_DELAY)
+			setTimeout(() => toggleClassnames(step3, 'unactive', 'active'), BACK_ANIMATION_DELAY)
 		} else if (currentlyActive.length === 3) {
 			conicGradient(false, step2)
-			toggleClassnames(bar1, 'unactive', 'active')
-			toggleClassnames(step2, 'unactive', 'active')
-		}
+			setTimeout(() => toggleClassnames(bar1, 'unactive', 'active'), BACK_ANIMATION_DELAY)
+			setTimeout(() => toggleClassnames(step2, 'unactive', 'active'), BACK_ANIMATION_DELAY)
+		} else return
 
 		currentlyActive.pop()
 		currentlyActive.pop()
@@ -66,7 +79,7 @@ function conicGradient(goToNext, elm) {
 
 		elm.style.background = `conic-gradient(from ${color}deg, transparent ${transparent}deg, var(--secondary) ${transparent}deg ${color}deg)`
 
-		goToNext ? color-- : (color += 2)
-		goToNext ? (transparent += 2) : transparent--
+		goToNext ? (color -= 2) : (color += 2)
+		goToNext ? (transparent += 4) : (transparent -= 4)
 	}, 1)
 }
