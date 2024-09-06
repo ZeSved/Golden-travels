@@ -110,9 +110,7 @@ h1 {
       padding: .5rem;
     }
 
-    &#step1.active {
-      /* background: var(--gradient); */
-
+    &#step-1.active {
       background: conic-gradient(from 270deg, red 0deg, transparent 0deg 270deg);
     }
   }
