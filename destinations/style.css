@@ -111,10 +111,9 @@ h1 {
     }
 
     &#step1.active {
-      background: var(--gradient);
+      /* background: var(--gradient); */
 
       background: conic-gradient(from 270deg, red 0deg, transparent 0deg 270deg);
-
     }
   }
 
@@ -131,7 +130,7 @@ h1 {
   }
 }
 
-main {
+#location {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -169,4 +168,34 @@ input {
   border-radius: 4px;
   padding: 4px;
   text-align: center;
+}
+
+#location,
+#dates,
+#confirm {
+  &.hidden {
+    display: none;
+  }
+}
+
+#dates {
+  width: 100vw;
+  display: flex;
+  justify-content: space-between;
+  padding-inline: 2rem;
+
+  div {
+    display: grid;
+    grid-template-columns: repeat(7, 3rem);
+    grid-template-rows: repeat(5, 2rem);
+    gap: 8px;
+
+    p {
+      padding: 1rem;
+      background-color: var(--secondary);
+      border-radius: 8px;
+      text-align: center;
+      /* border: 2px solid blue; */
+    }
+  }
 }

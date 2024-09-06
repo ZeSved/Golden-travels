@@ -12,10 +12,14 @@ const step1 = document.getElementById('step1')
 const step2 = document.getElementById('step2')
 const step3 = document.getElementById('step3')
 
+const tripLocation = document.getElementById('location')
+const dates = document.getElementById('dates')
+const confirmDetails = document.getElementById('confirm')
+
 const currentlyActive = ['step1']
 
 const FORWARD_ANIMATION_DELAY = 600
-const BACK_ANIMATION_DELAY = FORWARD_ANIMATION_DELAY + 100
+const BACK_ANIMATION_DELAY = FORWARD_ANIMATION_DELAY
 
 next.addEventListener('click', () => handleTransition(true))
 previous.addEventListener('click', () => handleTransition(false))
@@ -43,21 +47,33 @@ function handleTransition(goToNext) {
 			toggleClassnames(step2, 'active', 'unactive')
 			currentlyActive.push('bar1', 'step2')
 			setTimeout(() => conicGradient(true, step2), FORWARD_ANIMATION_DELAY)
+
+			toggleClassnames(tripLocation, 'hidden', 'current')
+			toggleClassnames(dates, 'current', 'hidden')
 		} else if (currentlyActive.length === 3) {
 			toggleClassnames(bar2, 'active', 'unactive')
 			toggleClassnames(step3, 'active', 'unactive')
 			currentlyActive.push('bar2', 'step3')
 			setTimeout(() => conicGradient(true, step3), FORWARD_ANIMATION_DELAY)
+
+			toggleClassnames(dates, 'hidden', 'current')
+			toggleClassnames(confirmDetails, 'current', 'hidden')
 		}
 	} else {
 		if (currentlyActive.length === 5) {
 			conicGradient(false, step3)
 			setTimeout(() => toggleClassnames(bar2, 'unactive', 'active'), BACK_ANIMATION_DELAY)
 			setTimeout(() => toggleClassnames(step3, 'unactive', 'active'), BACK_ANIMATION_DELAY)
+
+			toggleClassnames(confirmDetails, 'hidden', 'current')
+			toggleClassnames(dates, 'current', 'hidden')
 		} else if (currentlyActive.length === 3) {
 			conicGradient(false, step2)
 			setTimeout(() => toggleClassnames(bar1, 'unactive', 'active'), BACK_ANIMATION_DELAY)
 			setTimeout(() => toggleClassnames(step2, 'unactive', 'active'), BACK_ANIMATION_DELAY)
+
+			toggleClassnames(dates, 'hidden', 'current')
+			toggleClassnames(tripLocation, 'current', 'hidden')
 		} else return
 
 		currentlyActive.pop()
