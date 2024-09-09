@@ -45,7 +45,8 @@ const classToggles = {
 }
 
 const FORWARD_ANIMATION_DELAY = 600
-const BACK_ANIMATION_DELAY = 350
+// const BACK_ANIMATION_DELAY = (360 / Math.floor(window.innerWidth / 200)) * 14
+const BACK_ANIMATION_DELAY = 1200
 
 next.addEventListener('click', () => handleAnimations(true))
 previous.addEventListener('click', () => handleAnimations(false))
@@ -91,11 +92,14 @@ function handleAnimations(goToNext) {
 	} else {
 		if (activeLen === 1) return
 
-		conicGradient(false, progressBarReverse[activeLen - 2][0])
-		setTimeout(
-			() => toggleClassnames(progressBarReverse[activeLen - 3], progressBarReverse[activeLen - 2]),
-			BACK_ANIMATION_DELAY
+		conicGradient(false, progressBarReverse[activeLen - 2][0], () =>
+			toggleClassnames(progressBarReverse[activeLen - 3], progressBarReverse[activeLen - 2])
 		)
+
+		// setTimeout(
+		// 	() => toggleClassnames(progressBarReverse[activeLen - 3], progressBarReverse[activeLen - 2]),
+		// 	BACK_ANIMATION_DELAY
+		// )
 		toggleClassnames(pageReverse[activeLen - 3], pageReverse[activeLen - 2])
 
 		currentlyActive.pop()
@@ -110,16 +114,20 @@ function toggleClassnames(...classArrays) {
 	})
 }
 
-function conicGradient(goToNext, elm) {
+function conicGradient(goToNext, elm, callback) {
 	let transparent = goToNext ? 0 : 360
 	let color = goToNext ? 270 : 90
 
 	const id = setInterval(() => {
-		if ((goToNext && transparent === 360) || (!goToNext && transparent === 0)) clearInterval(id)
+		if ((goToNext && transparent === 360) || (!goToNext && transparent === 0)) {
+			clearInterval(id)
+
+			if (callback) callback()
+		}
 
 		elm.style.background = `conic-gradient(from ${color}deg, transparent ${transparent}deg, var(--secondary) ${transparent}deg ${color}deg)`
 
 		goToNext ? (color -= 2) : (color += 2)
 		goToNext ? (transparent += 4) : (transparent -= 4)
-	}, 1)
+	})
 }

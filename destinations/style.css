@@ -91,7 +91,7 @@ h1 {
       left: 0;
       border-radius: 100vh;
       background: var(--gradient);
-      border: 1px solid var(--primary);
+      border: 2px solid var(--primary);
     }
 
     &::after {
@@ -185,7 +185,24 @@ input {
   section {
     display: flex;
     flex-direction: column;
+    gap: 1rem;
 
+    div:not(.date-grid) {
+      display: flex;
+      justify-content: space-around;
+
+      p {
+        width: fit-content;
+      }
+
+      button {
+        border: none;
+        outline: none;
+        background-color: transparent;
+        cursor: pointer;
+        font-size: 2rem;
+      }
+    }
 
     div.date-grid {
       display: grid;
