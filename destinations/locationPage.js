@@ -61,7 +61,7 @@ function updateMaps(e, map) {
 	;(map === 'city'
 		? cityMap
 		: hotelMap
-	).src = `https://www.google.com/maps/embed/v1/place?key=AIzaSyBJJNyhCEg8sxLsO6YMZ-GMFTT-c5-Cz_Q&q=${e.target.value
+	).src = `https://www.google.com/maps/embed/v1/place?key=AIzaSyBJJNyhCEg8sxLsO6YMZ-GMFTT-c5-Cz_Q&q=${e.currentTarget.value
 		.trim()
 		.replaceAll(' ', '+')}`
 }

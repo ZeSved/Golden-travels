@@ -182,18 +182,32 @@ input {
   justify-content: space-between;
   padding-inline: 2rem;
 
-  div {
-    display: grid;
-    grid-template-columns: repeat(7, 3rem);
-    grid-template-rows: repeat(5, 2rem);
-    gap: 8px;
+  section {
+    display: flex;
+    flex-direction: column;
 
-    p {
-      padding: 1rem;
-      background-color: var(--secondary);
-      border-radius: 8px;
-      text-align: center;
-      /* border: 2px solid blue; */
+
+    div.date-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 3rem);
+      grid-template-rows: repeat(6, 3rem);
+      gap: 8px;
+
+      p {
+        padding: 1rem;
+        font-size: 1rem;
+        background-color: var(--secondary);
+        border-radius: 8px;
+        text-align: center;
+
+        &.today {
+          border: 1px solid green;
+        }
+
+        &.otherMonth {
+          opacity: 0.5;
+        }
+      }
     }
   }
 }
