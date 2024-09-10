@@ -276,7 +276,30 @@ input {
         text-align: center;
 
         &.today {
-          border: 1px solid green;
+          position: relative;
+
+          &::before,
+          &::after {
+            content: '';
+            position: absolute;
+            width: 20%;
+            height: 140%;
+            z-index: -1;
+            top: 50%;
+            left: 50%;
+            translate: -50% -50%;
+            border-radius: 100vh;
+          }
+
+          &::before {
+            rotate: 45deg;
+            background-color: var(--main-gold);
+          }
+
+          &::after {
+            background-color: var(--light-gold);
+            rotate: -45deg;
+          }
         }
 
         &.otherMonth {
