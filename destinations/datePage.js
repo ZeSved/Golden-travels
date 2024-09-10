@@ -43,15 +43,16 @@ function createDateGrid(elm) {
 				daysShown.unshift(paragraph)
 			}
 		}
+	}
 
-		if (new Date(YEAR, MONTH + 1, 0).toString().substring(0, 3) === days[day]) {
-			for (let i = 1; i < days.length - day; i++) {
-				const paragraph = document.createElement('p')
-				paragraph.appendChild(document.createTextNode(i))
-				paragraph.className = 'otherMonth'
-				daysShown.push(paragraph)
-			}
-		}
+	let i = 1
+	while (daysShown.length < 42) {
+		console.log(daysShown.length)
+		const paragraph = document.createElement('p')
+		paragraph.appendChild(document.createTextNode(i))
+		paragraph.className = 'otherMonth'
+		daysShown.push(paragraph)
+		i++
 	}
 
 	daysShown.forEach((day) => {
