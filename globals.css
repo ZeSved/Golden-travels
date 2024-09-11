@@ -44,7 +44,7 @@ body {
   --gradient: linear-gradient(10deg, var(--main-gold) 0%, var(--light-gold) 50%, var(--main-gold) 100%);
 }
 
-span.golden {
+.golden {
   background: var(--gradient);
   background-clip: text;
   -webkit-text-fill-color: transparent;

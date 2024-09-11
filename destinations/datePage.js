@@ -80,7 +80,7 @@ function createDateGrid(elm, month) {
 		paragraph.appendChild(document.createTextNode(dayNumber))
 
 		if (dayNumber === new Date().getDate() && month === currentMonth) {
-			paragraph.className = 'today'
+			paragraph.className = 'golden'
 		} else if (
 			(dayNumber < new Date().getDate() && month === currentMonth) ||
 			month < currentMonth
