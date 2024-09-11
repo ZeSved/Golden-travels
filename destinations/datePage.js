@@ -1,32 +1,23 @@
-const dateGridFrom = document.getElementById('date-grid-from')
-const dateGridTo = document.getElementById('date-grid-to')
-const firstSection = document.getElementById('from')
-const secondSection = document.getElementById('to')
+const dateGrid = document.getElementById('date-grid')
+const calendar = document.getElementById('calendar')
 
-const firstSectChildren = {
-	previous: firstSection.querySelector('.previous'),
-	next: firstSection.querySelector('.next'),
-	year: firstSection.querySelector('.year'),
-	month: firstSection.querySelector('.month'),
-	difference: 0,
-}
-
-const secondSectChildren = {
-	previous: secondSection.querySelector('.previous'),
-	next: secondSection.querySelector('.next'),
-	year: secondSection.querySelector('.year'),
-	month: secondSection.querySelector('.month'),
+const calendarChildren = {
+	previous: calendar.querySelector('.previous'),
+	next: calendar.querySelector('.next'),
+	year: calendar.querySelector('.year'),
+	month: calendar.querySelector('.month'),
 	difference: 0,
 }
 
 const eventListeners = [
-	[firstSectChildren, firstSectChildren.next, 1, dateGridFrom],
-	[firstSectChildren, firstSectChildren.previous, -1, dateGridFrom],
-	[secondSectChildren, secondSectChildren.next, 1, dateGridTo],
-	[secondSectChildren, secondSectChildren.previous, -1, dateGridTo],
+	[calendarChildren.next, 1],
+	[calendarChildren.previous, -1],
 ]
 
-const onInitalLoad = [firstSectChildren, secondSectChildren]
+const dates = {
+	start: 0,
+	end: 0,
+}
 
 const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
 
@@ -34,50 +25,64 @@ const currentYear = new Date().getFullYear()
 const currentMonth = new Date().getMonth()
 const currentDay = new Date().getDay()
 
-onInitalLoad.forEach((item) => {
-	item.year.textContent = currentYear
-	item.month.textContent = capitalizeFirst(
-		new Date(currentYear, currentMonth, currentDay).toLocaleString('default', {
-			month: 'long',
+setTimeout(() => {
+	const dayButtons = dateGrid.querySelectorAll('.selectable')
+
+	dayButtons.forEach((btn) => {
+		btn.addEventListener('click', () => {
+			dayButtons.forEach((b) => b.classList.remove('selected'))
+
+			btn.classList.add('selected')
 		})
-	)
+	})
 })
+
+calendarChildren.year.textContent = currentYear
+calendarChildren.month.textContent = capitalizeFirst(
+	new Date(currentYear, currentMonth, currentDay).toLocaleString('default', {
+		month: 'long',
+	})
+)
 
 eventListeners.forEach((item) => {
-	item[1].addEventListener('click', () => changeMonth(item[0], item[2], item[3]))
+	item[0].addEventListener('click', () => changeMonth(item[1]))
 })
 
-function changeMonth(object, amountChanged, elm) {
-	const obj = { ...object }
+function changeMonth(amountChanged) {
+	const obj = { ...calendarChildren }
 	const { year, month } = obj
 
-	object.difference += amountChanged
+	calendarChildren.difference += amountChanged
 	year.textContent = currentYear
 	month.textContent = capitalizeFirst(
-		new Date(currentYear, currentMonth + object.difference, currentDay).toLocaleString('default', {
-			month: 'long',
-		})
+		new Date(currentYear, currentMonth + calendarChildren.difference, currentDay).toLocaleString(
+			'default',
+			{
+				month: 'long',
+			}
+		)
 	)
 
-	createDateGrid(elm, currentMonth + object.difference)
+	createDateGrid(currentMonth + calendarChildren.difference)
 }
 
-createDateGrid(dateGridFrom, currentMonth)
-createDateGrid(dateGridTo, currentMonth)
+createDateGrid(currentMonth)
 
-function createDateGrid(elm, month) {
+function createDateGrid(month) {
 	const daysShown = []
 	const lastDayOfMonth = new Date(currentYear, month + 1, 0).getDate()
 	const currentMonthWeekdayStart = new Date(currentYear, month, 1).toString().substring(0, 3)
 	const lastDayPreviousMonth = new Date(currentYear, month, 0).getDate()
 
-	while (elm.firstChild) {
-		elm.removeChild(elm.firstChild)
+	while (dateGrid.firstChild) {
+		dateGrid.removeChild(dateGrid.firstChild)
 	}
 
 	for (let dayNumber = 1; dayNumber <= lastDayOfMonth; dayNumber++) {
+		const button = document.createElement('button')
 		const paragraph = document.createElement('p')
 		paragraph.appendChild(document.createTextNode(dayNumber))
+		button.appendChild(paragraph)
 
 		if (dayNumber === new Date().getDate() && month === currentMonth) {
 			paragraph.className = 'golden'
@@ -86,27 +91,29 @@ function createDateGrid(elm, month) {
 			month < currentMonth
 		) {
 			paragraph.className = 'old-days'
+		} else {
+			button.classList.add('selectable')
 		}
 
-		daysShown.push(paragraph)
+		daysShown.push(button)
 	}
 
 	for (let day = 0; day <= days.length - 1; day++) {
 		if (currentMonthWeekdayStart === days[day]) {
 			for (let i = lastDayPreviousMonth; i >= lastDayPreviousMonth - day + 1; i--) {
-				createParagraph(daysShown, i, false)
+				createDayBox(daysShown, i, false)
 			}
 		}
 	}
 
 	let i = 1
 	while (daysShown.length < 42) {
-		createParagraph(daysShown, i, true)
+		createDayBox(daysShown, i, true)
 		i++
 	}
 
 	daysShown.forEach((day) => {
-		elm.appendChild(day)
+		dateGrid.appendChild(day)
 	})
 }
 
@@ -117,14 +124,16 @@ function capitalizeFirst(str) {
 	return firstLetter + remainingString
 }
 
-function createParagraph(arr, i, addToEnd) {
+function createDayBox(arr, i, addToEnd) {
+	const button = document.createElement('button')
 	const paragraph = document.createElement('p')
 	paragraph.appendChild(document.createTextNode(i))
-	paragraph.className = 'otherMonth'
+	button.classList.add('otherMonth')
+	button.appendChild(paragraph)
 
 	if (addToEnd) {
-		arr.push(paragraph)
+		arr.push(button)
 	} else {
-		arr.unshift(paragraph)
+		arr.unshift(button)
 	}
 }
