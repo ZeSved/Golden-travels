@@ -16,6 +16,8 @@ const tripLocation = document.getElementById('location')
 const dates = document.getElementById('dates')
 const confirmDetails = document.getElementById('confirm')
 
+const title = document.getElementById('title')
+
 const currentlyActive = ['step_1']
 const classToggles = {
 	progressBar: [
@@ -43,6 +45,8 @@ const classToggles = {
 		[confirmDetails, 'hidden', 'current'],
 	],
 }
+
+const titleContents = ['Choose where', 'Choose when', 'Confirm details']
 
 const FORWARD_ANIMATION_DELAY = 600
 // const BACK_ANIMATION_DELAY = (360 / Math.floor(window.innerWidth / 200)) * 14
@@ -95,6 +99,9 @@ function handleAnimations(goToNext) {
 		currentlyActive.pop()
 		currentlyActive.pop()
 	}
+
+	title.textContent =
+		titleContents[currentlyActive.length === 1 ? 1 : Math.floor(currentlyActive.length / 2)]
 }
 
 function toggleClassnames(...classArrays) {

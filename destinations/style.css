@@ -93,16 +93,16 @@ h1 {
       background: var(--secondary);
     }
 
-    &.unactive::after {
-      animation: .6s shorten linear;
-      left: -0.5%;
-      width: 101%;
-    }
-
     &.active::after {
-      animation: .6s widen linear;
+      animation: .6s widen ease-in;
       width: 0%;
       left: 100.5%;
+    }
+
+    &.unactive::after {
+      animation: .6s shorten ease-out;
+      left: -0.5%;
+      width: 101%;
     }
   }
 
@@ -158,11 +158,11 @@ h1 {
     }
 
     &.active {
-      animation: forward 1s .6s linear forwards;
+      animation: forward 1s .6s ease-out forwards;
     }
 
     &.unactive {
-      animation: backward 1s linear forwards;
+      animation: backward 1s ease-in forwards;
     }
 
     &#step-1.active {
@@ -276,30 +276,36 @@ input {
         text-align: center;
 
         &.today {
+          --clip-path: polygon(45% 45%, 80% 20%, 80% 0%, 100% 0%, 100% 20%, 80% 20%, 55% 55%, 20% 80%, 20% 100%, 0% 100%, 0% 80%, 20% 80%);
+
           position: relative;
 
           &::before,
           &::after {
             content: '';
             position: absolute;
-            width: 20%;
-            height: 140%;
+            width: 110%;
+            height: 110%;
             z-index: -1;
             top: 50%;
             left: 50%;
             translate: -50% -50%;
-            border-radius: 100vh;
+            border-radius: 10px;
+            clip-path: var(--clip-path);
           }
 
           &::before {
-            rotate: 45deg;
             background-color: var(--main-gold);
           }
 
           &::after {
             background-color: var(--light-gold);
-            rotate: -45deg;
+            rotate: -90deg;
           }
+        }
+
+        &.old-days {
+          color: #ffffff50;
         }
 
         &.otherMonth {

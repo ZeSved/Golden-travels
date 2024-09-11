@@ -81,6 +81,11 @@ function createDateGrid(elm, month) {
 
 		if (dayNumber === new Date().getDate() && month === currentMonth) {
 			paragraph.className = 'today'
+		} else if (
+			(dayNumber < new Date().getDate() && month === currentMonth) ||
+			month < currentMonth
+		) {
+			paragraph.className = 'old-days'
 		}
 
 		daysShown.push(paragraph)
@@ -89,20 +94,14 @@ function createDateGrid(elm, month) {
 	for (let day = 0; day <= days.length - 1; day++) {
 		if (currentMonthWeekdayStart === days[day]) {
 			for (let i = lastDayPreviousMonth; i >= lastDayPreviousMonth - day + 1; i--) {
-				const paragraph = document.createElement('p')
-				paragraph.appendChild(document.createTextNode(i))
-				paragraph.className = 'otherMonth'
-				daysShown.unshift(paragraph)
+				createParagraph(daysShown, i, false)
 			}
 		}
 	}
 
 	let i = 1
 	while (daysShown.length < 42) {
-		const paragraph = document.createElement('p')
-		paragraph.appendChild(document.createTextNode(i))
-		paragraph.className = 'otherMonth'
-		daysShown.push(paragraph)
+		createParagraph(daysShown, i, true)
 		i++
 	}
 
@@ -116,4 +115,16 @@ function capitalizeFirst(str) {
 	const remainingString = str.slice(1)
 
 	return firstLetter + remainingString
+}
+
+function createParagraph(arr, i, addToEnd) {
+	const paragraph = document.createElement('p')
+	paragraph.appendChild(document.createTextNode(i))
+	paragraph.className = 'otherMonth'
+
+	if (addToEnd) {
+		arr.push(paragraph)
+	} else {
+		arr.unshift(paragraph)
+	}
 }
