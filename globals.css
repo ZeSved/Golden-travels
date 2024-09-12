@@ -46,8 +46,8 @@ body {
 
 .golden {
   background: var(--gradient);
-  background-clip: text;
   -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 a:not(:has(img)) {

@@ -90,7 +90,7 @@ function createDateGrid(month) {
 			(dayNumber < new Date().getDate() && month === currentMonth) ||
 			month < currentMonth
 		) {
-			paragraph.className = 'old-days'
+			button.className = 'old-days'
 		} else {
 			button.classList.add('selectable')
 		}

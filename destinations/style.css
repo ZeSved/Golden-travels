@@ -267,17 +267,23 @@ input {
     grid-template-rows: repeat(6, 1fr);
 
     button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      width: 100%;
       position: relative;
       border-radius: 10px;
       background-color: var(--primary);
-      border: none;
+      border: 2px solid var(--secondary);
 
       &.selectable::after,
-      &>p.old-days::after {
+      &.old-days::after,
+      &>p.golden::after {
         content: '';
         position: absolute;
-        width: 101%;
-        height: 101%;
+        width: calc(100% + 4px);
+        height: calc(100% + 4px);
         z-index: -1;
         top: 50%;
         left: 50%;
@@ -310,28 +316,59 @@ input {
       p {
         border-radius: 8px;
         width: 100%;
-        height: 100%;
+        height: fit-content;
         background-color: var(--primary);
-        border: 2px solid var(--secondary);
-        font-size: 1rem;
+        /* border: 2px solid var(--secondary); */
+        font-size: 2rem;
+
+        /* margin-block: auto; */
         text-align: center;
 
         &.golden {
           font-weight: 900;
         }
 
-        &.old-days {
-          color: #ffffff50;
-        }
+      }
+
+      &.old-days p {
+        background-color: var(--primary);
+        color: #ffffff50;
       }
 
       &.otherMonth {
-        opacity: 0.5;
-        border: 2px dashed var(--secondary);
+        background-color: var(--primary);
+        position: relative;
+        border: 4px dashed #2b2b2b80;
+
+        &::after {
+          content: '';
+          position: absolute;
+          width: calc(100% + 8px);
+          height: calc(100% + 8px);
+          z-index: -1;
+          top: 50%;
+          left: 50%;
+          translate: -50% -50%;
+          background-color: var(--secondary);
+        }
 
         p {
-          border: 2px dashed var(--secondary);
+          /* border: 2px dashed var(--secondary); */
+          color: #ffffff50;
+          border: none;
         }
+      }
+
+      &.selectable+.otherMonth:has(+.otherMonth) {
+        /* border-top: 4px solid var(--secondary);
+        border-left: 4px solid var(--secondary); */
+        /* clip-path: polygon(0 0, 100% 0%, 100% 10%, 10% 100%, 0 100%); */
+        /* z-index: 2; */
+        background-color: red;
+      }
+
+      &.otherMonth+.otherMonth:has(+.old-days) {
+        background-color: red;
       }
     }
   }
