@@ -79,6 +79,7 @@ function createDateGrid(month) {
 	}
 
 	for (let dayNumber = 1; dayNumber <= lastDayOfMonth; dayNumber++) {
+		const div = document.createElement('div')
 		const button = document.createElement('button')
 		const paragraph = document.createElement('p')
 		paragraph.appendChild(document.createTextNode(dayNumber))
@@ -95,7 +96,9 @@ function createDateGrid(month) {
 			button.classList.add('selectable')
 		}
 
-		daysShown.push(button)
+		div.appendChild(button)
+
+		daysShown.push(div)
 	}
 
 	for (let day = 0; day <= days.length - 1; day++) {
@@ -112,6 +115,34 @@ function createDateGrid(month) {
 		i++
 	}
 
+	console.log(daysShown)
+
+	for (let i = 0; i <= daysShown.length; i++) {
+		const siblingDownClasses = daysShown[i + 7]?.firstChild.classList
+		const siblingUpClasses = daysShown[i - 7]?.firstChild.classList
+
+		if (daysShown[i]?.firstChild.className !== 'otherMonth') continue
+
+		if (
+			siblingDownClasses &&
+			siblingDownClasses.contains('otherMonth') &&
+			siblingUpClasses &&
+			siblingUpClasses.contains('otherMonth')
+		)
+			continue
+
+		if (
+			!(siblingDownClasses
+				? siblingDownClasses.contains('otherMonth')
+				: siblingUpClasses.contains('otherMonth'))
+		) {
+			daysShown[i].classList.add(siblingDownClasses ? 'br-down' : 'br-up')
+			continue
+		}
+	}
+
+	console.log(daysShown)
+
 	daysShown.forEach((day) => {
 		dateGrid.appendChild(day)
 	})
@@ -125,15 +156,17 @@ function capitalizeFirst(str) {
 }
 
 function createDayBox(arr, i, addToEnd) {
+	const div = document.createElement('div')
 	const button = document.createElement('button')
 	const paragraph = document.createElement('p')
 	paragraph.appendChild(document.createTextNode(i))
 	button.classList.add('otherMonth')
 	button.appendChild(paragraph)
+	div.appendChild(button)
 
 	if (addToEnd) {
-		arr.push(button)
+		arr.push(div)
 	} else {
-		arr.unshift(button)
+		arr.unshift(div)
 	}
 }

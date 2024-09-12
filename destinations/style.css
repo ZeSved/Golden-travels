@@ -260,116 +260,165 @@ input {
     }
   }
 
-  div.date-grid {
+  .date-grid {
     display: grid;
     height: 100%;
     grid-template-columns: repeat(7, 1fr);
     grid-template-rows: repeat(6, 1fr);
 
-    button {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100%;
-      width: 100%;
-      position: relative;
-      border-radius: 10px;
-      background-color: var(--primary);
-      border: 2px solid var(--secondary);
+    div {
+      background-color: var(--secondary);
 
-      &.selectable::after,
-      &.old-days::after,
-      &>p.golden::after {
-        content: '';
-        position: absolute;
-        width: calc(100% + 4px);
-        height: calc(100% + 4px);
-        z-index: -1;
-        top: 50%;
-        left: 50%;
-        translate: -50% -50%;
-        background-color: var(--secondary);
+      &.br-down {
+        padding-bottom: 2px;
       }
 
-      /* &>p.old-days {
-
-      } */
-
-      &.selected {
-        --clip-path: polygon(20% 20%, 0% 20%, 0% 0%, 20% 0%, 20% 20%, 40% 30%, 50% 50%, 40% 70%, 20% 80%, 20% 100%, 0% 100%, 0% 80%, 20% 80%, 30% 50%);
-
-        &::before {
-          content: '';
-          position: absolute;
-          width: 110%;
-          height: 110%;
-          z-index: -1;
-          top: 50%;
-          left: 50%;
-          translate: -50% -50%;
-          border-radius: 10px;
-          clip-path: var(--clip-path);
-          background-color: var(--main-gold);
-        }
+      &.br-up {
+        padding-top: 2px;
       }
 
-      p {
-        border-radius: 8px;
+      &:nth-child(7n) {
+        padding-right: 2px;
+      }
+
+      &:nth-child(7n + 1) {
+        padding-left: 2px;
+      }
+
+      &:nth-child(-n + 7) {
+        padding-top: 2px;
+      }
+
+      &:nth-last-child(-n + 7) {
+        padding-bottom: 2px;
+      }
+
+      &:nth-child(1) {
+        border-top-left-radius: 10px;
+      }
+
+      &:nth-child(7) {
+        border-top-right-radius: 10px;
+      }
+
+      &:nth-child(36) {
+        border-bottom-left-radius: 10px;
+      }
+
+      &:nth-child(42) {
+        border-bottom-right-radius: 10px;
+      }
+
+      button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
         width: 100%;
-        height: fit-content;
-        background-color: var(--primary);
-        /* border: 2px solid var(--secondary); */
-        font-size: 2rem;
-
-        /* margin-block: auto; */
-        text-align: center;
-
-        &.golden {
-          font-weight: 900;
-        }
-
-      }
-
-      &.old-days p {
-        background-color: var(--primary);
-        color: #ffffff50;
-      }
-
-      &.otherMonth {
-        background-color: var(--primary);
         position: relative;
-        border: 4px dashed #2b2b2b80;
+        border-radius: 10px;
+        background-color: var(--primary);
+        border: 2px solid var(--secondary);
 
-        &::after {
-          content: '';
-          position: absolute;
-          width: calc(100% + 8px);
-          height: calc(100% + 8px);
-          z-index: -1;
-          top: 50%;
-          left: 50%;
-          translate: -50% -50%;
-          background-color: var(--secondary);
+        &.selected {
+          --clip-path: polygon(20% 20%, 0% 20%, 0% 0%, 20% 0%, 20% 20%, 40% 30%, 50% 50%, 40% 70%, 20% 80%, 20% 100%, 0% 100%, 0% 80%, 20% 80%, 30% 50%);
+
+          &::before {
+            content: '';
+            position: absolute;
+            width: 110%;
+            height: 110%;
+            z-index: -1;
+            top: 50%;
+            left: 50%;
+            translate: -50% -50%;
+            border-radius: 8px;
+            clip-path: var(--clip-path);
+            background-color: var(--main-gold);
+          }
         }
 
         p {
-          /* border: 2px dashed var(--secondary); */
-          color: #ffffff50;
-          border: none;
-        }
-      }
+          height: fit-content;
+          background-color: var(--primary);
+          font-size: 2rem;
 
-      &.selectable+.otherMonth:has(+.otherMonth) {
-        /* border-top: 4px solid var(--secondary);
-        border-left: 4px solid var(--secondary); */
-        /* clip-path: polygon(0 0, 100% 0%, 100% 10%, 10% 100%, 0 100%); */
-        /* z-index: 2; */
+          &.golden {
+            font-weight: 900;
+          }
+
+        }
+
+        &.old-days p {
+          background-color: var(--primary);
+          color: #ffffff50;
+        }
+
+        &.otherMonth {
+          background-color: var(--primary);
+          position: relative;
+          border: 2px dotted #2b2b2b80;
+
+          p {
+            color: #ffffff50;
+            border: none;
+          }
+        }
+
+        /* &.selectable+.otherMonth:has(+.otherMonth) {
         background-color: red;
       }
 
       &.otherMonth+.otherMonth:has(+.old-days) {
         background-color: red;
+      } */
+
       }
+
+      &:has(.otherMonth) {
+        background-color: #2b2b2b80;
+      }
+
+      /* &:has(.otherMonth)+:not(:has(~div>.selectable)):has(~&:last-child) {
+        background: linear-gradient(var(--secondary) 30%, var(--secondary) 40%, var(--primary) 100%);
+
+        >.otherMonth {
+          border-top: none;
+          background-color: red;
+        }
+      }
+
+      &:has(.otherMonth)~:not(:has(+div>.selectable, +div>.old-days, +div>button>.golden)):not(:has(.selectable):has(~&:last-child)) {
+        background: linear-gradient(180deg, var(--secondary) 30%, var(--secondary) 40%, var(--primary) 100%);
+        background-color: red;
+
+        >.otherMonth {
+          border-bottom: none;
+          background-color: blue;
+        }
+      }
+
+      &:not(:has(.otherMonth))+div:has(.otherMonth):has(+div) {
+        background: linear-gradient(155deg, var(--secondary) 50%, var(--primary) 100%);
+        padding-left: 2px;
+        padding-bottom: 4px;
+
+        .otherMonth {
+          border-bottom: none;
+          border-top: none;
+          border-left: none;
+          border-radius: 8px;
+        }
+      }
+
+      &:last-child {
+        background: linear-gradient(var(--secondary) 30%, var(--secondary) 40%, var(--primary) 100%);
+
+        .otherMonth {
+          border-right: none;
+          border-top: none;
+        }
+      } */
     }
   }
 
