@@ -1,3 +1,5 @@
+import { toggleClassnames } from './utils.js'
+
 const cityMap = document.getElementById('city-map')
 const hotelMap = document.getElementById('hotel-map')
 const cityInput = document.getElementById('city-input')
@@ -104,9 +106,9 @@ function handleAnimations(goToNext) {
 		titleContents[currentlyActive.length === 1 ? 1 : Math.floor(currentlyActive.length / 2)]
 }
 
-function toggleClassnames(...classArrays) {
-	Array.from(classArrays).forEach((item) => {
-		item[0].classList.add(item[1])
-		item[0].classList.remove(item[2])
-	})
-}
+// function toggleClassnames(...classArrays) {
+// 	Array.from(classArrays).forEach((item) => {
+// 		item[0].classList.add(item[1])
+// 		item[0].classList.remove(item[2])
+// 	})
+// }

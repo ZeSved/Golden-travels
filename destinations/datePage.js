@@ -1,3 +1,5 @@
+import { toggleClassnames } from './utils.js'
+
 const dateGrid = document.getElementById('date-grid')
 const calendar = document.getElementById('calendar')
 
@@ -26,13 +28,24 @@ const currentMonth = new Date().getMonth()
 const currentDay = new Date().getDay()
 
 setTimeout(() => {
-	const dayButtons = dateGrid.querySelectorAll('.selectable')
+	const dayBoxes = dateGrid.querySelectorAll('.selectable')
 
-	dayButtons.forEach((btn) => {
-		btn.addEventListener('click', () => {
-			dayButtons.forEach((b) => b.classList.remove('selected'))
+	dayBoxes.forEach((day) => {
+		day.addEventListener('click', () => {
+			dayBoxes.forEach((b) => b.classList.remove('selected'))
 
-			btn.classList.add('selected')
+			day.classList.add('selected')
+		})
+
+		const last = day.lastChild
+		const first = day.firstChild
+
+		day.addEventListener('mouseover', () => {
+			toggleClassnames([last, 'show', 'hide'], [first, 'small', 'big'])
+		})
+
+		day.addEventListener('mouseout', () => {
+			toggleClassnames([last, 'hide', 'show'], [first, 'big', 'small'])
 		})
 	})
 })
@@ -79,11 +92,22 @@ function createDateGrid(month) {
 	}
 
 	for (let dayNumber = 1; dayNumber <= lastDayOfMonth; dayNumber++) {
-		const div = document.createElement('div')
-		const button = document.createElement('button')
+		const containerDiv = document.createElement('div')
 		const paragraph = document.createElement('p')
+		const btnDiv = document.createElement('div')
+		const startBtn = document.createElement('button')
+		const endBtn = document.createElement('button')
+
+		paragraph.classList.add('big')
+		btnDiv.classList.add('hide')
+
 		paragraph.appendChild(document.createTextNode(dayNumber))
-		button.appendChild(paragraph)
+		startBtn.appendChild(document.createTextNode('Start'))
+		endBtn.appendChild(document.createTextNode('End'))
+		btnDiv.appendChild(startBtn)
+		btnDiv.appendChild(endBtn)
+		containerDiv.appendChild(paragraph)
+		containerDiv.appendChild(btnDiv)
 
 		if (dayNumber === new Date().getDate() && month === currentMonth) {
 			paragraph.className = 'golden'
@@ -91,14 +115,12 @@ function createDateGrid(month) {
 			(dayNumber < new Date().getDate() && month === currentMonth) ||
 			month < currentMonth
 		) {
-			button.className = 'old-days'
+			containerDiv.className = 'old-days'
 		} else {
-			button.classList.add('selectable')
+			containerDiv.classList.add('selectable')
 		}
 
-		div.appendChild(button)
-
-		daysShown.push(div)
+		daysShown.push(containerDiv)
 	}
 
 	for (let day = 0; day <= days.length - 1; day++) {
@@ -141,8 +163,6 @@ function createDateGrid(month) {
 		}
 	}
 
-	console.log(daysShown)
-
 	daysShown.forEach((day) => {
 		dateGrid.appendChild(day)
 	})
@@ -156,17 +176,27 @@ function capitalizeFirst(str) {
 }
 
 function createDayBox(arr, i, addToEnd) {
-	const div = document.createElement('div')
-	const button = document.createElement('button')
+	const containerDiv = document.createElement('div')
+	const btnDiv = document.createElement('div')
 	const paragraph = document.createElement('p')
+	const startBtn = document.createElement('button')
+	const endBtn = document.createElement('button')
+
+	containerDiv.classList.add('otherMonth')
+	paragraph.classList.add('big')
+	btnDiv.classList.add('hide')
+
 	paragraph.appendChild(document.createTextNode(i))
-	button.classList.add('otherMonth')
-	button.appendChild(paragraph)
-	div.appendChild(button)
+	startBtn.appendChild(document.createTextNode('Start'))
+	endBtn.appendChild(document.createTextNode('End'))
+	btnDiv.appendChild(startBtn)
+	btnDiv.appendChild(endBtn)
+	containerDiv.appendChild(paragraph)
+	containerDiv.appendChild(btnDiv)
 
 	if (addToEnd) {
-		arr.push(div)
+		arr.push(containerDiv)
 	} else {
-		arr.unshift(div)
+		arr.unshift(containerDiv)
 	}
 }

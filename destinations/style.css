@@ -244,13 +244,6 @@ input {
     display: flex;
     justify-content: space-around;
 
-    &:nth-child(2) {
-      p {
-        width: 7rem;
-        text-align: center;
-      }
-    }
-
     button {
       border: none;
       outline: none;
@@ -268,90 +261,95 @@ input {
     gap: 2px;
 
     div {
-      background-color: var(--secondary);
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      background-color: var(--primary);
+      border: 2px solid var(--secondary);
       border-radius: 10px;
+      padding: .5rem;
 
-      &.br-down {
-        padding-bottom: 2px;
-      }
-
-      &.br-up {
-        padding-top: 2px;
-        padding-inline: 2px;
-        background-color: var(--secondary);
-
-        .otherMonth {
-          border-top: none;
-          border-left: none;
-          border-right: none;
-        }
-      }
-
-      button {
-        display: flex;
+      &:has(.hide) {
         justify-content: center;
-        align-items: center;
-        height: 100%;
-        width: 100%;
-        position: relative;
-        border-radius: 10px;
-        background-color: var(--primary);
-        border: 2px solid var(--secondary);
+        overflow-y: hidden;
+      }
 
-        &.otherMonth,
-        &.old-days,
-        &:has(.golden) {
-          cursor: default;
+      &:has(.show) {
+        justify-content: space-between;
+      }
+
+      &.otherMonth,
+      &.old-days,
+      &:has(.golden) {
+        cursor: default;
+      }
+
+      &.selected {
+        --clip-path: polygon(20% 20%, 0% 20%, 0% 0%, 20% 0%, 20% 20%, 40% 30%, 50% 50%, 40% 70%, 20% 80%, 20% 100%, 0% 100%, 0% 80%, 20% 80%, 30% 50%);
+
+        &::before {
+          content: '';
+          position: absolute;
+          width: 110%;
+          height: 110%;
+          z-index: -1;
+          top: 50%;
+          left: 50%;
+          translate: -50% -50%;
+          border-radius: 8px;
+          clip-path: var(--clip-path);
+          background-color: var(--main-gold);
+        }
+      }
+
+      p {
+        height: fit-content;
+
+        &.big {
+          font-size: 2rem;
         }
 
-        &.selected {
-          --clip-path: polygon(20% 20%, 0% 20%, 0% 0%, 20% 0%, 20% 20%, 40% 30%, 50% 50%, 40% 70%, 20% 80%, 20% 100%, 0% 100%, 0% 80%, 20% 80%, 30% 50%);
-
-          &::before {
-            content: '';
-            position: absolute;
-            width: 110%;
-            height: 110%;
-            z-index: -1;
-            top: 50%;
-            left: 50%;
-            translate: -50% -50%;
-            border-radius: 8px;
-            clip-path: var(--clip-path);
-            background-color: var(--main-gold);
-          }
+        &.small {
+          font-size: 1.5rem;
         }
+
+        &.golden {
+          font-weight: 900;
+          font-size: 2rem;
+        }
+      }
+
+      &.old-days p {
+        color: #ffffff50;
+      }
+
+      &.otherMonth {
+        filter: blur(3px);
 
         p {
-          height: fit-content;
-          background-color: var(--primary);
-          font-size: 2rem;
-
-          &.golden {
-            font-weight: 900;
-          }
-
-        }
-
-        &.old-days p {
-          background-color: var(--primary);
           color: #ffffff50;
-        }
-
-        &.otherMonth {
-          background-color: var(--primary);
-          position: relative;
-          border: 2px solid var(--secondary);
-
-          p {
-            color: #ffffff50;
-            border: none;
-          }
+          border: none;
         }
       }
 
-      &:has(.otherMonth) {
-        filter: blur(3px);
+      .hide {
+        display: none;
+      }
+
+      .show {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row;
+        height: fit-content;
+        width: 100%;
+        border: none;
+
+        button {
+          background-color: transparent;
+          border: 2px solid white;
+          font-size: 1.5rem;
+          padding: .4rem .8rem;
+        }
       }
     }
   }
