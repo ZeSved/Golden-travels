@@ -256,26 +256,53 @@ input {
   .date-grid {
     display: grid;
     height: 100%;
+    width: 100%;
     grid-template-columns: repeat(7, 1fr);
     grid-template-rows: repeat(6, 1fr);
     gap: 2px;
 
     div {
+      position: relative;
       display: flex;
       align-items: center;
-      flex-direction: column;
+      justify-content: space-around;
       background-color: var(--primary);
       border: 2px solid var(--secondary);
       border-radius: 10px;
       padding: .5rem;
 
-      &:has(.hide) {
-        justify-content: center;
-        overflow-y: hidden;
+      /* &:has(.show) {
+        z-index: 5;
+        width: 130%;
+        left: 20%;
+      } */
+
+      &:has(.hide, .show)::after {
+        content: '';
+        position: absolute;
+        height: 52%;
+        top: 50%;
+        left: 50%;
+        translate: -50% -50%;
+        transition: all .2s;
+        border-top-style: dotted;
+        border-top-width: 2px;
+        border-bottom-style: dotted;
+        border-bottom-width: 2px;
       }
 
-      &:has(.show) {
-        justify-content: space-between;
+      &:has(.hide)::after {
+        opacity: 0;
+        width: 80%;
+        border-top-color: var(--secondary);
+        border-bottom-color: var(--secondary);
+      }
+
+      &:has(.show)::after {
+        opacity: 1;
+        width: 15%;
+        border-top-color: white;
+        border-bottom-color: white;
       }
 
       &.otherMonth,
@@ -284,33 +311,16 @@ input {
         cursor: default;
       }
 
-      &.selected {
-        --clip-path: polygon(20% 20%, 0% 20%, 0% 0%, 20% 0%, 20% 20%, 40% 30%, 50% 50%, 40% 70%, 20% 80%, 20% 100%, 0% 100%, 0% 80%, 20% 80%, 30% 50%);
-
-        &::before {
-          content: '';
-          position: absolute;
-          width: 110%;
-          height: 110%;
-          z-index: -1;
-          top: 50%;
-          left: 50%;
-          translate: -50% -50%;
-          border-radius: 8px;
-          clip-path: var(--clip-path);
-          background-color: var(--main-gold);
-        }
-      }
-
       p {
         height: fit-content;
+        transition: all .2s;
 
         &.big {
           font-size: 2rem;
         }
 
         &.small {
-          font-size: 1.5rem;
+          font-size: 1rem;
         }
 
         &.golden {
@@ -332,24 +342,107 @@ input {
         }
       }
 
+      &.otherMonth,
+      &.old-days,
+      &:has(.golden) {
+
+        .hide,
+        .show {
+          display: none;
+        }
+      }
+
+      &.start {
+        --clip-path: polygon(20% 20%, 0% 20%, 0% 0%, 20% 0%, 20% 20%, 40% 30%, 50% 50%, 40% 70%, 20% 80%, 20% 100%, 0% 100%, 0% 80%, 20% 80%, 30% 50%);
+
+        &::before {
+          content: '';
+          position: absolute;
+          width: 105%;
+          height: 110%;
+          z-index: -1;
+          top: 48.25%;
+          left: 50%;
+          translate: -50% -48.25%;
+          border-radius: 10px;
+          clip-path: var(--clip-path);
+          background-color: var(--main-gold);
+        }
+      }
+
+      &.end {
+        --clip-path: polygon(20% 20%, 0% 20%, 0% 0%, 20% 0%, 20% 20%, 40% 30%, 50% 50%, 40% 70%, 20% 80%, 20% 100%, 0% 100%, 0% 80%, 20% 80%, 30% 50%);
+
+        &::before {
+          content: '';
+          position: absolute;
+          width: 110%;
+          height: 110%;
+          z-index: -1;
+          top: 50%;
+          left: 50%;
+          translate: -50% -50%;
+          border-radius: 8px;
+          clip-path: var(--clip-path);
+          background-color: var(--light-gold);
+          rotate: 180deg;
+        }
+      }
+
+      .hide,
+      .show {
+        transition: all .2s;
+      }
+
       .hide {
-        display: none;
+        background-color: transparent;
+        font-size: 1rem;
+        opacity: 0;
+        width: 0;
+
+        &:first-child {
+          transform: translateX(-30px);
+        }
+
+        &:last-child {
+          transform: translateX(calc-size(15px - 4rem));
+        }
       }
 
       .show {
+        opacity: 1;
         display: flex;
-        justify-content: space-between;
-        flex-direction: row;
+        justify-content: center;
+        align-items: center;
         height: fit-content;
-        width: 100%;
         border: none;
+        width: 2.8rem;
+        padding-block: 4px;
+        border: 2px solid white;
+        font-size: 1rem;
+        overflow-x: visible;
 
-        button {
-          background-color: transparent;
-          border: 2px solid white;
-          font-size: 1.5rem;
-          padding: .4rem .8rem;
+        &:first-child,
+        &:last-child {
+          transform: translateX(0px);
+          text-align: center;
         }
+
+        &:first-child {
+          border-top-left-radius: 4px;
+          border-bottom-left-radius: 4px;
+          border-right: none;
+        }
+
+        &:last-child {
+          border-top-right-radius: 4px;
+          border-bottom-right-radius: 4px;
+          border-left: none;
+        }
+
+        /* &:last-child {
+          transform: translateX(40px);
+        } */
       }
     }
   }

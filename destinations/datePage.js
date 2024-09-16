@@ -17,8 +17,8 @@ const eventListeners = [
 ]
 
 const dates = {
-	start: 0,
-	end: 0,
+	start: [0, 0, 0],
+	end: [0, 0, 0],
 }
 
 const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
@@ -31,30 +31,40 @@ setTimeout(() => {
 	const dayBoxes = dateGrid.querySelectorAll('.selectable')
 
 	dayBoxes.forEach((day) => {
-		day.addEventListener('click', () => {
-			dayBoxes.forEach((b) => b.classList.remove('selected'))
+		const first = day.firstChild
+		const middle = day.children[1]
+		const last = day.lastChild
 
-			day.classList.add('selected')
+		day.firstChild.addEventListener('click', () => {
+			dayBoxes.forEach((b) => b.classList.remove('start'))
+
+			day.classList.add('start')
 		})
 
-		const last = day.lastChild
-		const first = day.firstChild
+		day.lastChild.addEventListener('click', () => {
+			dayBoxes.forEach((b) => b.classList.remove('end'))
+
+			day.classList.add('end')
+		})
 
 		day.addEventListener('mouseover', () => {
-			toggleClassnames([last, 'show', 'hide'], [first, 'small', 'big'])
+			toggleClassnames([last, 'show', 'hide'], [first, 'show', 'hide'], [middle, 'small', 'big'])
 		})
 
 		day.addEventListener('mouseout', () => {
-			toggleClassnames([last, 'hide', 'show'], [first, 'big', 'small'])
+			toggleClassnames([last, 'hide', 'show'], [middle, 'big', 'small'], [first, 'hide', 'show'])
 		})
 	})
 })
 
 calendarChildren.year.textContent = currentYear
 calendarChildren.month.textContent = capitalizeFirst(
-	new Date(currentYear, currentMonth, currentDay).toLocaleString('default', {
-		month: 'long',
-	})
+	new Date(currentYear, currentMonth + calendarChildren.difference, currentDay).toLocaleString(
+		'default',
+		{
+			month: 'long',
+		}
+	)
 )
 
 eventListeners.forEach((item) => {
@@ -79,7 +89,7 @@ function changeMonth(amountChanged) {
 	createDateGrid(currentMonth + calendarChildren.difference)
 }
 
-createDateGrid(currentMonth)
+createDateGrid(currentMonth + calendarChildren.difference)
 
 function createDateGrid(month) {
 	const daysShown = []
@@ -93,21 +103,20 @@ function createDateGrid(month) {
 
 	for (let dayNumber = 1; dayNumber <= lastDayOfMonth; dayNumber++) {
 		const containerDiv = document.createElement('div')
-		const paragraph = document.createElement('p')
-		const btnDiv = document.createElement('div')
 		const startBtn = document.createElement('button')
+		const paragraph = document.createElement('p')
 		const endBtn = document.createElement('button')
 
 		paragraph.classList.add('big')
-		btnDiv.classList.add('hide')
+		startBtn.classList.add('hide')
+		endBtn.classList.add('hide')
 
 		paragraph.appendChild(document.createTextNode(dayNumber))
 		startBtn.appendChild(document.createTextNode('Start'))
 		endBtn.appendChild(document.createTextNode('End'))
-		btnDiv.appendChild(startBtn)
-		btnDiv.appendChild(endBtn)
+		containerDiv.appendChild(startBtn)
 		containerDiv.appendChild(paragraph)
-		containerDiv.appendChild(btnDiv)
+		containerDiv.appendChild(endBtn)
 
 		if (dayNumber === new Date().getDate() && month === currentMonth) {
 			paragraph.className = 'golden'
@@ -136,8 +145,6 @@ function createDateGrid(month) {
 		createDayBox(daysShown, i, true)
 		i++
 	}
-
-	console.log(daysShown)
 
 	for (let i = 0; i <= daysShown.length; i++) {
 		const siblingDownClasses = daysShown[i + 7]?.firstChild.classList
@@ -177,22 +184,21 @@ function capitalizeFirst(str) {
 
 function createDayBox(arr, i, addToEnd) {
 	const containerDiv = document.createElement('div')
-	const btnDiv = document.createElement('div')
-	const paragraph = document.createElement('p')
 	const startBtn = document.createElement('button')
+	const paragraph = document.createElement('p')
 	const endBtn = document.createElement('button')
 
 	containerDiv.classList.add('otherMonth')
 	paragraph.classList.add('big')
-	btnDiv.classList.add('hide')
+	startBtn.classList.add('hide')
+	endBtn.classList.add('hide')
 
 	paragraph.appendChild(document.createTextNode(i))
 	startBtn.appendChild(document.createTextNode('Start'))
 	endBtn.appendChild(document.createTextNode('End'))
-	btnDiv.appendChild(startBtn)
-	btnDiv.appendChild(endBtn)
+	containerDiv.appendChild(startBtn)
 	containerDiv.appendChild(paragraph)
-	containerDiv.appendChild(btnDiv)
+	containerDiv.appendChild(endBtn)
 
 	if (addToEnd) {
 		arr.push(containerDiv)
