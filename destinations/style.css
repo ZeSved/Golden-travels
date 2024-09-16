@@ -270,40 +270,7 @@ input {
       border: 2px solid var(--secondary);
       border-radius: 10px;
       padding: .5rem;
-
-      /* &:has(.show) {
-        z-index: 5;
-        width: 130%;
-        left: 20%;
-      } */
-
-      &:has(.hide, .show)::after {
-        content: '';
-        position: absolute;
-        height: 52%;
-        top: 50%;
-        left: 50%;
-        translate: -50% -50%;
-        transition: all .2s;
-        border-top-style: dotted;
-        border-top-width: 2px;
-        border-bottom-style: dotted;
-        border-bottom-width: 2px;
-      }
-
-      &:has(.hide)::after {
-        opacity: 0;
-        width: 80%;
-        border-top-color: var(--secondary);
-        border-bottom-color: var(--secondary);
-      }
-
-      &:has(.show)::after {
-        opacity: 1;
-        width: 15%;
-        border-top-color: white;
-        border-bottom-color: white;
-      }
+      cursor: pointer;
 
       &.otherMonth,
       &.old-days,
@@ -314,13 +281,14 @@ input {
       p {
         height: fit-content;
         transition: all .2s;
+        user-select: none;
 
         &.big {
-          font-size: 2rem;
+          font-size: 3rem;
         }
 
         &.small {
-          font-size: 1rem;
+          font-size: 2rem;
         }
 
         &.golden {
@@ -352,18 +320,45 @@ input {
         }
       }
 
+      &.selected {
+        border-top: 2px solid var(--main-gold);
+        border-bottom: 2px solid var(--main-gold);
+
+        &:first-of-type {
+          border-left: 2px solid var(--main-gold);
+        }
+
+        &:last-of-type {
+          border-right: 2px solid var(--main-gold);
+        }
+      }
+
+      &.planned::before {
+        content: '';
+        position: absolute;
+        width: calc(100% + 2px);
+        height: calc(100% + 2px);
+        z-index: -1;
+        top: 50%;
+        left: 50%;
+        translate: -50% -50%;
+        border-radius: 10px;
+        background-color: var(--main-gold);
+        clip-path: polygon(0% 0%, 25% 0%, 50% 50%, 75% 0%, 100% 0%, 50% 50%, 100% 100%, 75% 100%, 50% 50%, 25% 100%, 0% 100%, 50% 50%);
+      }
+
       &.start {
         --clip-path: polygon(20% 20%, 0% 20%, 0% 0%, 20% 0%, 20% 20%, 40% 30%, 50% 50%, 40% 70%, 20% 80%, 20% 100%, 0% 100%, 0% 80%, 20% 80%, 30% 50%);
 
         &::before {
           content: '';
           position: absolute;
-          width: 105%;
-          height: 110%;
+          width: calc(100% + 10px);
+          height: calc(100% + 10px);
           z-index: -1;
-          top: 48.25%;
+          top: 50%;
           left: 50%;
-          translate: -50% -48.25%;
+          translate: -50% -50%;
           border-radius: 10px;
           clip-path: var(--clip-path);
           background-color: var(--main-gold);
@@ -420,7 +415,6 @@ input {
         padding-block: 4px;
         border: 2px solid white;
         font-size: 1rem;
-        overflow-x: visible;
 
         &:first-child,
         &:last-child {
