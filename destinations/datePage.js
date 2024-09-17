@@ -3,17 +3,14 @@ import { toggleClassnames } from './utils.js'
 const dateGrid = document.getElementById('date-grid')
 const calendar = document.getElementById('calendar')
 
-const calendarChildren = {
-	previous: calendar.querySelector('.previous'),
-	next: calendar.querySelector('.next'),
-	year: calendar.querySelector('.year'),
-	month: calendar.querySelector('.month'),
-	difference: 0,
-}
+const previous = document.querySelector('.previous')
+const next = document.querySelector('.next')
+const yearDisplay = document.querySelector('.year')
+const monthDisplay = document.querySelector('.month')
 
 const eventListeners = [
-	[calendarChildren.next, 1],
-	[calendarChildren.previous, -1],
+	[next, 1],
+	[previous, -1],
 ]
 
 const dates = []
@@ -24,14 +21,16 @@ const currentYear = new Date().getFullYear()
 const currentMonth = new Date().getMonth()
 const currentDay = new Date().getDay()
 
-calendarChildren.year.textContent = currentYear
-calendarChildren.month.textContent = capitalizeFirst(
-	new Date(currentYear, currentMonth + calendarChildren.difference, currentDay).toLocaleString(
-		'default',
-		{
-			month: 'long',
-		}
-	)
+const difference = {
+	year: currentYear,
+	month: currentMonth,
+}
+
+yearDisplay.textContent = difference.year
+monthDisplay.textContent = capitalizeFirst(
+	new Date(difference.year, difference.month, currentDay).toLocaleString('default', {
+		month: 'long',
+	})
 )
 
 eventListeners.forEach((item) => {
@@ -39,30 +38,35 @@ eventListeners.forEach((item) => {
 })
 
 function changeMonth(amountChanged) {
-	const obj = { ...calendarChildren }
-	const { year, month } = obj
+	if (amountChanged === -1 && difference.month === 0) {
+		difference.year -= 1
+		difference.month = 12
+	}
 
-	calendarChildren.difference += amountChanged
-	year.textContent = currentYear
-	month.textContent = capitalizeFirst(
-		new Date(currentYear, currentMonth + calendarChildren.difference, currentDay).toLocaleString(
-			'default',
-			{
-				month: 'long',
-			}
-		)
+	if (amountChanged === 1 && difference.month === 11) {
+		difference.year += 1
+		difference.month = 0
+	} else {
+		difference.month += amountChanged
+	}
+
+	yearDisplay.textContent = difference.year
+	monthDisplay.textContent = capitalizeFirst(
+		new Date(difference.year, difference.month, currentDay).toLocaleString('default', {
+			month: 'long',
+		})
 	)
 
-	createDateGrid(currentMonth + calendarChildren.difference)
+	createDateGrid(difference.month, difference.year)
 }
 
-createDateGrid(currentMonth + calendarChildren.difference)
+createDateGrid(difference.month, difference.year)
 
-function createDateGrid(month) {
+function createDateGrid(month, year) {
 	const daysShown = []
-	const lastDayOfMonth = new Date(currentYear, month + 1, 0).getDate()
-	const currentMonthWeekdayStart = new Date(currentYear, month, 1).toString().substring(0, 3)
-	const lastDayPreviousMonth = new Date(currentYear, month, 0).getDate()
+	const lastDayOfMonth = new Date(year, month + 1, 0).getDate()
+	const currentMonthWeekdayStart = new Date(year, month, 1).toString().substring(0, 3)
+	const lastDayPreviousMonth = new Date(year, month, 0).getDate()
 
 	while (dateGrid.firstChild) {
 		dateGrid.removeChild(dateGrid.firstChild)
@@ -77,11 +81,12 @@ function createDateGrid(month) {
 		paragraph.appendChild(document.createTextNode(dayNumber))
 		containerDiv.appendChild(paragraph)
 
-		if (dayNumber === new Date().getDate() && month === currentMonth) {
+		if (dayNumber === new Date().getDate() && month === currentMonth && year === currentYear) {
 			paragraph.className = 'golden'
 		} else if (
-			(dayNumber < new Date().getDate() && month === currentMonth) ||
-			month < currentMonth
+			(dayNumber < new Date().getDate() && month === currentMonth && year === currentYear) ||
+			(month < currentMonth && year <= currentYear) ||
+			year < currentYear
 		) {
 			containerDiv.className = 'old-days'
 		} else {
@@ -133,6 +138,7 @@ function createDateGrid(month) {
 		dateGrid.appendChild(day)
 	})
 
+	assignSelectedClasses(Array.from(dateGrid.children), dates)
 	setTimeout(() => handleDayEventListeners())
 }
 
@@ -165,53 +171,43 @@ function handleDayEventListeners() {
 
 	dayBoxes.forEach((day) => {
 		day.addEventListener('click', (e) => {
+			const targetDay = parseInt(e.currentTarget.textContent)
 			Array.from(dateGrid.children).forEach((d) => d.classList.remove('selected', 'first', 'last'))
 
 			if (dates.length === 2) {
-				dates.pop()
+				switch (true) {
+					case targetDay === dates[0][2] + 1:
+					case targetDay === dates[0][2] - 1:
+						dates.shift()
+						break
+					case targetDay === dates[1][2] + 1:
+					case targetDay === dates[1][2] - 1:
+						dates.pop()
+						break
+					case targetDay >= dates[0][2] + 2:
+					case targetDay <= dates[1][2] - 2:
+						if (
+							targetDay - dates[0][2] > dates[1][2] - targetDay ||
+							targetDay - dates[0][2] === dates[1][2] - targetDay
+						) {
+							dates.pop()
+							break
+						}
+
+						if (targetDay - dates[0][2] < dates[1][2] - targetDay) {
+							dates.shift()
+							break
+						}
+				}
 			}
 
-			dates.unshift([
-				currentYear,
-				currentMonth + calendarChildren.difference,
-				parseInt(e.currentTarget.textContent),
-			])
+			dates.push([difference.year, difference.month, targetDay])
 
 			const selected = Array.from(dateGrid.children).filter((days) =>
 				days.classList.contains('selectable')
 			)
-			let firstSelectedDay
-			let lastSelectedDay
 
-			// if ()
-			// const firstSelectedDay = dates[1]
-			// 	? dates[0][2] > dates[1][2]
-			// 		? dates[1][2]
-			// 		: dates[0][2]
-			// 	: dates[0][2]
-			// const lastSelectedDay = dates[1]
-			// 	? dates[0][2] > dates[1][2]
-			// 		? dates[0][2]
-			// 		: dates[1][2]
-			// 	: dates[0][2]
-
-			console.log(firstSelectedDay)
-			console.log(lastSelectedDay)
-
-			selected.forEach((day) => {
-				console.log(parseInt(day.children[0].textContent))
-				const dayShown = parseInt(day.children[0].textContent)
-
-				if (dayShown < firstSelectedDay || dayShown > lastSelectedDay) return
-
-				if (dayShown === firstSelectedDay) {
-					day.classList.add('first')
-				} else if (dayShown === lastSelectedDay) {
-					day.classList.add('last')
-				} else {
-					day.classList.add('selected')
-				}
-			})
+			assignSelectedClasses(selected, dates)
 		})
 
 		day.addEventListener('mouseover', () => {
@@ -221,5 +217,44 @@ function handleDayEventListeners() {
 		day.addEventListener('mouseout', () => {
 			toggleClassnames([day.firstChild, 'small', 'big'])
 		})
+	})
+}
+
+function assignSelectedClasses(elm, dateList) {
+	if (!dateList[0]) return
+
+	dateList.sort((firstDate, lastDate) => {
+		if (firstDate[0] < lastDate[0]) return -1
+		if (firstDate[0] > lastDate[0]) return 1
+
+		if (firstDate[1] < lastDate[1]) return -1
+		if (firstDate[1] > lastDate[1]) return 1
+
+		if (firstDate[2] < lastDate[2]) return -1
+		if (firstDate[2] > lastDate[2]) return 1
+	})
+
+	const firstSelectedDay = dateList[0]
+	const lastSelectedDay = dateList[1] ?? dateList[0]
+
+	elm.forEach((day) => {
+		const dayShown = parseInt(day.children[0].textContent)
+
+		if (dayShown < firstSelectedDay[2] || dayShown > lastSelectedDay[2]) return
+
+		console.log(difference.month)
+		console.log(firstSelectedDay[1])
+
+		if (dayShown === firstSelectedDay[2] && difference.month === firstSelectedDay[1]) {
+			day.classList.add('first')
+		} else if (dayShown === lastSelectedDay[2] && difference.month === lastSelectedDay[1]) {
+			day.classList.add('last')
+		} else if (
+			((dayShown >= firstSelectedDay[2] && difference.month === firstSelectedDay) ||
+				(dayShown <= lastSelectedDay[2] && difference.month === lastSelectedDay[1])) &&
+			day.classList.contains('selectable')
+		) {
+			day.classList.add('selected')
+		}
 	})
 }
