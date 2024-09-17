@@ -24,42 +24,6 @@ const currentYear = new Date().getFullYear()
 const currentMonth = new Date().getMonth()
 const currentDay = new Date().getDay()
 
-setTimeout(() => {
-	const dayBoxes = Array.from(dateGrid.querySelectorAll('.selectable'))
-
-	dayBoxes.forEach((d) => d.classList.remove('selected'))
-
-	dayBoxes.forEach((day) => {
-		day.addEventListener('click', (e) => {
-			if (dates.length === 2) {
-				dates.pop()
-			}
-
-			dates.unshift([
-				currentYear,
-				currentMonth + calendarChildren.difference,
-				parseInt(e.currentTarget.textContent),
-			])
-
-			console.log(dates)
-
-			dates.forEach((date) => {
-				if (date[0] === currentYear && date[1] === currentMonth + calendarChildren.difference) {
-					Array.from(dateGrid.children)[date[2] + 5].classList.add('selected')
-				}
-			})
-		})
-
-		day.addEventListener('mouseover', () => {
-			toggleClassnames([day.firstChild, 'big', 'small'])
-		})
-
-		day.addEventListener('mouseout', () => {
-			toggleClassnames([day.firstChild, 'small', 'big'])
-		})
-	})
-})
-
 calendarChildren.year.textContent = currentYear
 calendarChildren.month.textContent = capitalizeFirst(
 	new Date(currentYear, currentMonth + calendarChildren.difference, currentDay).toLocaleString(
@@ -168,6 +132,8 @@ function createDateGrid(month) {
 	daysShown.forEach((day) => {
 		dateGrid.appendChild(day)
 	})
+
+	setTimeout(() => handleDayEventListeners())
 }
 
 function capitalizeFirst(str) {
@@ -192,4 +158,68 @@ function createDayBox(arr, i, addToEnd) {
 	} else {
 		arr.unshift(containerDiv)
 	}
+}
+
+function handleDayEventListeners() {
+	const dayBoxes = dateGrid.querySelectorAll('.selectable')
+
+	dayBoxes.forEach((day) => {
+		day.addEventListener('click', (e) => {
+			Array.from(dateGrid.children).forEach((d) => d.classList.remove('selected', 'first', 'last'))
+
+			if (dates.length === 2) {
+				dates.pop()
+			}
+
+			dates.unshift([
+				currentYear,
+				currentMonth + calendarChildren.difference,
+				parseInt(e.currentTarget.textContent),
+			])
+
+			const selected = Array.from(dateGrid.children).filter((days) =>
+				days.classList.contains('selectable')
+			)
+			let firstSelectedDay
+			let lastSelectedDay
+
+			// if ()
+			// const firstSelectedDay = dates[1]
+			// 	? dates[0][2] > dates[1][2]
+			// 		? dates[1][2]
+			// 		: dates[0][2]
+			// 	: dates[0][2]
+			// const lastSelectedDay = dates[1]
+			// 	? dates[0][2] > dates[1][2]
+			// 		? dates[0][2]
+			// 		: dates[1][2]
+			// 	: dates[0][2]
+
+			console.log(firstSelectedDay)
+			console.log(lastSelectedDay)
+
+			selected.forEach((day) => {
+				console.log(parseInt(day.children[0].textContent))
+				const dayShown = parseInt(day.children[0].textContent)
+
+				if (dayShown < firstSelectedDay || dayShown > lastSelectedDay) return
+
+				if (dayShown === firstSelectedDay) {
+					day.classList.add('first')
+				} else if (dayShown === lastSelectedDay) {
+					day.classList.add('last')
+				} else {
+					day.classList.add('selected')
+				}
+			})
+		})
+
+		day.addEventListener('mouseover', () => {
+			toggleClassnames([day.firstChild, 'big', 'small'])
+		})
+
+		day.addEventListener('mouseout', () => {
+			toggleClassnames([day.firstChild, 'small', 'big'])
+		})
+	})
 }
