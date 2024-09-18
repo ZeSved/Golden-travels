@@ -37,7 +37,7 @@
   </div>
 
 
-  <div id="location" class="current">
+  <div id="location" class="hidden">
     <iframe id="city-map" frameborder="0" style="border:0" referrerpolicy="no-referrer-when-downgrade" src=""
       allowfullscreen>
     </iframe>
@@ -75,17 +75,44 @@
     <div class="date-grid" id="date-grid"></div>
   </div>
 
-  <div id="confirm" class="hidden">
+  <div id="info-form" class="current">
     <form action="">
-      <label for=""></label><input type="text">
-      <label for=""></label><input type="text">
-      <label for=""></label><input type="number">
-      <label for=""></label><input type="email">
-      <label for=""></label><input type="tel">
-      <label for=""></label><textarea name="" id=""></textarea>
-      <label for=""></label><input type="text">
-      <label for=""></label><input type="text">
-      <label for=""></label><input type="date">
+      <fieldset id="personal">
+        <legend>Personal</legend>
+        <div><label for="first-name">First name</label><span class="req">*</span><input placeholder="Type to begin..."
+            type="text" name="first-name" required></div>
+        <div><label for="last-name">Last name</label><span class="req">*</span><input placeholder="Type to begin..."
+            type="text" name="last-name" required></div>
+        <div><label for="age">Age</label><span class="req">*</span><input placeholder="Type to begin..." type="number"
+            name="age" required></div>
+        <!-- <div><label for="traveled-before">I can speak English</label><input type="checkbox" name="traveled-before"
+            id=""></div> -->
+      </fieldset>
+
+      <fieldset id="contact">
+        <legend>Contact</legend>
+        <div><label for="email">Email</label><span class="req">*</span><input placeholder="just.example@gmail.com"
+            type="email" name="email" required></div>
+        <div><label for="phone-number">Phone number</label><span class="req">*</span><input
+            placeholder="Type to begin..." type="tel" name="phone-number" required></div>
+      </fieldset>
+
+      <div><label for="other">Anything extra you want us to know?</label><textarea
+          placeholder="Help us make your first journey the best..." name="other" id=""></textarea></div>
+
+      <fieldset id="payment">
+        <legend>Payment</legend>
+        <div><label for="card-name">Card holder name</label><span class="req">*</span><input
+            placeholder="Type to begin..." type="text" name="card-name"></div>
+        <div><label for="card-number">Card number</label><span class="req">*</span><input
+            placeholder="XXXX XXXX XXXX XXXX" type="text" name="card-number" required></div>
+        <div><label for="ccv">Card CCV</label><span class="req">*</span><input placeholder="XXXX" type="text" name="ccv"
+            required></div>
+        <div><label for="expires">Expiration date</label><span class="req">*</span><input placeholder="MM/YY"
+            type="text" name="expires" required></div>
+      </fieldset>
+
+      <button>Send</button>
     </form>
   </div>
 

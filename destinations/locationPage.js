@@ -15,7 +15,7 @@ const step_3 = document.getElementById('step-3')
 
 const tripLocation = document.getElementById('location')
 const dates = document.getElementById('calendar')
-const confirmDetails = document.getElementById('confirm')
+const infoForm = document.getElementById('info-form')
 
 const title = document.getElementById('title')
 
@@ -31,7 +31,7 @@ const classToggles = {
 		[tripLocation, 'hidden', 'current'],
 		[dates, 'current', 'hidden'],
 		[dates, 'hidden', 'current'],
-		[confirmDetails, 'current', 'hidden'],
+		[infoForm, 'current', 'hidden'],
 	],
 	progressBarReverse: [
 		[bar_1, 'unactive', 'active'],
@@ -43,11 +43,11 @@ const classToggles = {
 		[tripLocation, 'current', 'hidden'],
 		[dates, 'hidden', 'current'],
 		[dates, 'current', 'hidden'],
-		[confirmDetails, 'hidden', 'current'],
+		[infoForm, 'hidden', 'current'],
 	],
 }
 
-const titleContents = ['Choose where', 'Choose when', 'Confirm details']
+const titleContents = ['Choose where', 'Choose when', 'Final details']
 
 const BACK_ANIMATION_DELAY = 1000
 

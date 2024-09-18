@@ -242,41 +242,37 @@ function assignSelectedClasses(elm, dateList) {
 
 	elm.forEach((day) => {
 		const dayShown = parseInt(day.children[0].textContent)
-
 		const id = day.id.split('-').map((num) => parseInt(num))
-
-		if (
+		const conditionSets = [
 			id[0] === firstSelectedDay[0] &&
-			id[1] === firstSelectedDay[1] &&
-			id[2] === firstSelectedDay[2]
-		) {
-			day.classList.add('first')
-		}
-
-		if (
-			id[0] === lastSelectedDay[0] &&
-			id[1] === lastSelectedDay[1] &&
-			id[2] === lastSelectedDay[2]
-		) {
-			day.classList.add('last')
-		}
-
-		if (
-			(id[2] === dayShown &&
+				id[1] === firstSelectedDay[1] &&
+				id[2] === firstSelectedDay[2],
+			id[0] === lastSelectedDay[0] && id[1] === lastSelectedDay[1] && id[2] === lastSelectedDay[2],
+			id[2] === dayShown &&
 				id[0] >= firstSelectedDay[0] &&
 				id[1] >= firstSelectedDay[1] &&
 				id[2] >= firstSelectedDay[2] &&
 				id[0] <= lastSelectedDay[0] &&
 				id[1] <= lastSelectedDay[1] &&
-				id[2] <= lastSelectedDay[2]) ||
-			(firstSelectedDay[1] < lastSelectedDay[1] &&
+				id[2] <= lastSelectedDay[2],
+			firstSelectedDay[1] < lastSelectedDay[1] &&
 				((id[0] === firstSelectedDay[0] &&
 					id[1] === firstSelectedDay[1] &&
 					id[2] >= firstSelectedDay[2]) ||
 					(id[0] === lastSelectedDay[0] &&
 						id[1] === lastSelectedDay[1] &&
-						id[2] <= lastSelectedDay[2])))
-		) {
+						id[2] <= lastSelectedDay[2])),
+		]
+
+		if (conditionSets[0]) {
+			day.classList.add('first')
+		}
+
+		if (conditionSets[1]) {
+			day.classList.add('last')
+		}
+
+		if (conditionSets[2] || conditionSets[3]) {
 			day.classList.add('selected')
 		}
 	})
