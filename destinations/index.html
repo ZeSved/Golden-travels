@@ -37,7 +37,7 @@
   </div>
 
 
-  <div id="location" class="hidden">
+  <div id="location" class="current">
     <iframe id="city-map" frameborder="0" style="border:0" referrerpolicy="no-referrer-when-downgrade" src=""
       allowfullscreen>
     </iframe>
@@ -56,14 +56,14 @@
     </iframe>
   </div>
 
-  <div id="calendar" class="current">
+  <div id="calendar" class="hidden">
     <div>
-      <button class="previous">&longleftarrow;</button>
+      <button class="previous"><img src="../meta-images/arrows.svg" alt=""></button>
       <p class="year"></p>
       <p class="month"></p>
-      <button class="next">&longrightarrow;</button>
+      <button class="next"><img src="../meta-images/arrows.svg" alt=""></button>
     </div>
-    <div>
+    <div id="days">
       <p>Monday</p>
       <p>Tuesday</p>
       <p>Wednesday</p>
@@ -76,7 +76,17 @@
   </div>
 
   <div id="confirm" class="hidden">
-    <p>confirm</p>
+    <form action="">
+      <label for=""></label><input type="text">
+      <label for=""></label><input type="text">
+      <label for=""></label><input type="number">
+      <label for=""></label><input type="email">
+      <label for=""></label><input type="tel">
+      <label for=""></label><textarea name="" id=""></textarea>
+      <label for=""></label><input type="text">
+      <label for=""></label><input type="text">
+      <label for=""></label><input type="date">
+    </form>
   </div>
 
 

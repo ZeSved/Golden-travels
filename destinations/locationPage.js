@@ -10,12 +10,11 @@ const previous = document.getElementById('previous')
 
 const bar_1 = document.getElementById('bar-1')
 const bar_2 = document.getElementById('bar-2')
-const step_1 = document.getElementById('step-1')
 const step_2 = document.getElementById('step-2')
 const step_3 = document.getElementById('step-3')
 
 const tripLocation = document.getElementById('location')
-const dates = document.getElementById('dates')
+const dates = document.getElementById('calendar')
 const confirmDetails = document.getElementById('confirm')
 
 const title = document.getElementById('title')
@@ -50,8 +49,6 @@ const classToggles = {
 
 const titleContents = ['Choose where', 'Choose when', 'Confirm details']
 
-const FORWARD_ANIMATION_DELAY = 600
-// const BACK_ANIMATION_DELAY = (360 / Math.floor(window.innerWidth / 200)) * 14
 const BACK_ANIMATION_DELAY = 1000
 
 next.addEventListener('click', () => handleAnimations(true))
@@ -105,10 +102,3 @@ function handleAnimations(goToNext) {
 	title.textContent =
 		titleContents[currentlyActive.length === 1 ? 1 : Math.floor(currentlyActive.length / 2)]
 }
-
-// function toggleClassnames(...classArrays) {
-// 	Array.from(classArrays).forEach((item) => {
-// 		item[0].classList.add(item[1])
-// 		item[0].classList.remove(item[2])
-// 	})
-// }

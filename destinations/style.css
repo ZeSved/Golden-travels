@@ -67,6 +67,28 @@ h1 {
   }
 }
 
+@keyframes rotate-days {
+  from {
+    opacity: 0;
+    transform: rotateY(180deg);
+  }
+
+  to {
+    opacity: 1;
+    transform: rotateY(0deg);
+  }
+}
+
+@keyframes reveal {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
 #step-indicator {
   display: flex;
   justify-content: center;
@@ -194,6 +216,7 @@ h1 {
     width: 33%;
     aspect-ratio: 3 / 2;
     border-radius: 8px;
+    background-color: var(--secondary);
   }
 
   #location-input {
@@ -226,9 +249,13 @@ input {
 #location,
 #calendar,
 #confirm {
+  animation: reveal 1.6s ease-in-out;
+
   &.hidden {
     display: none;
   }
+
+  overflow-y: hidden;
 }
 
 #calendar {
@@ -240,16 +267,33 @@ input {
   padding-inline: 2rem;
   margin-inline: auto;
 
+  #days p {
+    width: 5.5rem;
+    text-align: center;
+  }
+
   div:not(.date-grid) {
     display: flex;
     justify-content: space-around;
+    align-items: center;
 
     button {
       border: none;
       outline: none;
       background-color: transparent;
       cursor: pointer;
+      width: 3rem;
+      aspect-ratio: 1;
       font-size: 2rem;
+
+      img {
+        width: 100%;
+        aspect-ratio: 1;
+
+        &:is(.previous>img) {
+          rotate: 180deg;
+        }
+      }
     }
   }
 
@@ -262,6 +306,7 @@ input {
     gap: 2px;
 
     div {
+      animation: rotate-days .2s ease-out;
       position: relative;
       display: flex;
       align-items: center;
@@ -271,6 +316,8 @@ input {
       border-radius: 10px;
       padding: .5rem;
       cursor: pointer;
+
+
 
       &.otherMonth,
       &.old-days,

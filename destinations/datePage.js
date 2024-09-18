@@ -81,6 +81,8 @@ function createDateGrid(month, year) {
 		paragraph.appendChild(document.createTextNode(dayNumber))
 		containerDiv.appendChild(paragraph)
 
+		containerDiv.id = `${difference.year}-${difference.month}-${dayNumber}`
+
 		if (dayNumber === new Date().getDate() && month === currentMonth && year === currentYear) {
 			paragraph.className = 'golden'
 		} else if (
@@ -99,14 +101,14 @@ function createDateGrid(month, year) {
 	for (let day = 0; day <= days.length - 1; day++) {
 		if (currentMonthWeekdayStart === days[day]) {
 			for (let i = lastDayPreviousMonth; i >= lastDayPreviousMonth - day + 1; i--) {
-				createDayBox(daysShown, i, false)
+				createDayBox(daysShown, i, false, { y: difference.year, m: difference.month - 1, d: i })
 			}
 		}
 	}
 
 	let i = 1
 	while (daysShown.length < 42) {
-		createDayBox(daysShown, i, true)
+		createDayBox(daysShown, i, true, { y: difference.year, m: difference.month + 1, d: i })
 		i++
 	}
 
@@ -149,11 +151,12 @@ function capitalizeFirst(str) {
 	return firstLetter + remainingString
 }
 
-function createDayBox(arr, i, addToEnd) {
+function createDayBox(arr, i, addToEnd, id) {
 	const containerDiv = document.createElement('div')
 	const paragraph = document.createElement('p')
 
 	containerDiv.classList.add('otherMonth')
+	containerDiv.id = `${id.y}-${id.m}-${id.d}`
 	paragraph.classList.add('small')
 
 	paragraph.appendChild(document.createTextNode(i))
@@ -240,19 +243,39 @@ function assignSelectedClasses(elm, dateList) {
 	elm.forEach((day) => {
 		const dayShown = parseInt(day.children[0].textContent)
 
-		if (dayShown < firstSelectedDay[2] || dayShown > lastSelectedDay[2]) return
+		const id = day.id.split('-').map((num) => parseInt(num))
 
-		console.log(difference.month)
-		console.log(firstSelectedDay[1])
-
-		if (dayShown === firstSelectedDay[2] && difference.month === firstSelectedDay[1]) {
+		if (
+			id[0] === firstSelectedDay[0] &&
+			id[1] === firstSelectedDay[1] &&
+			id[2] === firstSelectedDay[2]
+		) {
 			day.classList.add('first')
-		} else if (dayShown === lastSelectedDay[2] && difference.month === lastSelectedDay[1]) {
+		}
+
+		if (
+			id[0] === lastSelectedDay[0] &&
+			id[1] === lastSelectedDay[1] &&
+			id[2] === lastSelectedDay[2]
+		) {
 			day.classList.add('last')
-		} else if (
-			((dayShown >= firstSelectedDay[2] && difference.month === firstSelectedDay) ||
-				(dayShown <= lastSelectedDay[2] && difference.month === lastSelectedDay[1])) &&
-			day.classList.contains('selectable')
+		}
+
+		if (
+			(id[2] === dayShown &&
+				id[0] >= firstSelectedDay[0] &&
+				id[1] >= firstSelectedDay[1] &&
+				id[2] >= firstSelectedDay[2] &&
+				id[0] <= lastSelectedDay[0] &&
+				id[1] <= lastSelectedDay[1] &&
+				id[2] <= lastSelectedDay[2]) ||
+			(firstSelectedDay[1] < lastSelectedDay[1] &&
+				((id[0] === firstSelectedDay[0] &&
+					id[1] === firstSelectedDay[1] &&
+					id[2] >= firstSelectedDay[2]) ||
+					(id[0] === lastSelectedDay[0] &&
+						id[1] === lastSelectedDay[1] &&
+						id[2] <= lastSelectedDay[2])))
 		) {
 			day.classList.add('selected')
 		}
