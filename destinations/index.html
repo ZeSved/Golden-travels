@@ -8,18 +8,22 @@
   <script type="module" src="datePage.js" defer></script>
   <script type="module" src="utils.js" defer></script>
   <script type="module" src="form.js" defer></script>
+  <script type="module" src="../main.js" defer></script>
   <link rel="stylesheet" href="style.css">
   <!-- <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon"> -->
-  <title>Document</title>
+  <title>Golden travel - booking</title>
 </head>
 
 <body>
   <header>
     <nav>
       <a href="/"><img id="logo" src="../meta-images/Group 1.png" alt=""></a>
+      <button id="hamburger-menu"><span></span><span></span><span></span></button>
       <a href="about/">About</a><a href="destinations/">Destinations</a><a href="history/">My history</a>
     </nav>
   </header>
+  <nav id="nav-bar" class="hide"><a href="about/">About</a><a href="destinations/">Destinations</a><a href="history/">My
+      history</a></nav>
   <h1 id="title">Choose where</h1>
   <div id="step-indicator">
     <button id="previous"><img src="../meta-images/left arrow.png" alt=""></button>
@@ -38,7 +42,7 @@
   </div>
 
 
-  <div id="location" class="hidden">
+  <div id="location" class="current">
     <iframe id="city-map" frameborder="0" style="border:0" referrerpolicy="no-referrer-when-downgrade" src=""
       allowfullscreen>
     </iframe>
@@ -76,7 +80,7 @@
     <div class="date-grid" id="date-grid"></div>
   </div>
 
-  <div id="info-form" class="current">
+  <div id="info-form" class="hidden">
     <form action="">
       <fieldset id="personal">
         <legend>Personal</legend>

@@ -61,7 +61,7 @@ header {
   position: fixed;
   z-index: 5;
   padding-inline: 1rem;
-  width: 100%;
+  width: 100vw;
   background-color: #00000080;
   backdrop-filter: blur(10px);
   top: 0;
@@ -74,6 +74,10 @@ header {
     align-items: center;
     gap: 1rem;
 
+    #hamburger-menu {
+      display: none;
+    }
+
     a:has(img) {
       width: 3rem;
       margin-right: auto;
@@ -82,6 +86,39 @@ header {
         width: 100%;
         height: 100%;
       }
+    }
+  }
+}
+
+#nav-bar {
+
+  &.hide {
+    display: none;
+  }
+
+  &.show {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    width: 100vw;
+    height: fit-content;
+    display: flex;
+    /* flex-direction: column; */
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    gap: 1rem;
+    padding-top: 5rem;
+    background-color: var(--secondary);
+
+    a {
+      padding: .5rem 1rem;
+      border: 2px solid white;
+      border-radius: 100vh;
+      text-decoration: none;
+      line-break: none;
+      word-break: none;
     }
   }
 }
@@ -177,4 +214,56 @@ footer {
 *::-webkit-scrollbar-thumb {
   background: var(--secondary);
   border-radius: 16px;
+}
+
+@media screen and (max-width: 470px) {
+  header {
+    nav {
+      #hamburger-menu {
+        --span-h: calc(100% / 5);
+
+        width: 2.4rem;
+        height: 2rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: transparent;
+
+
+        span {
+          height: var(--span-h);
+          width: 2.4rem;
+          background-color: white;
+          border-radius: 100vh;
+          margin-block: calc(var(--span-h) / 3);
+          transition: all .4s ease-in-out;
+        }
+
+        &:focus span {
+          --tran-y: 190%;
+
+          &:nth-child(1) {
+            transform: translateY(var(--tran-y)) rotateZ(45deg);
+          }
+
+          &:nth-child(2) {
+            width: 0;
+          }
+
+          &:nth-child(3) {
+            transform: translateY(calc(var(--tran-y) * -1)) rotateZ(-45deg);
+          }
+        }
+      }
+
+      a:not(:has(img)) {
+        display: none;
+      }
+
+      a:has(img) {
+        width: 3rem;
+      }
+    }
+  }
 }

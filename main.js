@@ -1,5 +1,7 @@
 const sectionOne = document.getElementById('first-section')
 const sectionTwo = document.getElementById('second-section')
+const hamburgerMenu = document.getElementById('hamburger-menu')
+const navBar = document.getElementById('nav-bar')
 
 const photoElements = document.querySelectorAll('.photo')
 
@@ -36,6 +38,17 @@ document.addEventListener('scroll', () => {
 photoElements.forEach((photo) => {
 	photo.addEventListener('click', () => changeImages(photo))
 })
+
+hamburgerMenu.addEventListener('click', () => {
+	if (navBar.className === 'hide') {
+		navBar.className = 'show'
+	} else {
+		navBar.className = 'hide'
+		hamburgerMenu.blur()
+	}
+})
+
+hamburgerMenu.addEventListener('blur', () => (navBar.className = 'hide'))
 
 function changeImages(elm) {
 	const path = images[Math.floor(Math.random() * (images.length - 1 - 0 + 1) + 0)]

@@ -61,7 +61,6 @@ cityMap.src = `https://www.google.com/maps/embed/v1/place?key=AIzaSyBJJNyhCEg8sx
 hotelMap.src = `https://www.google.com/maps/embed/v1/place?key=AIzaSyBJJNyhCEg8sxLsO6YMZ-GMFTT-c5-Cz_Q&q=grand+hotel`
 
 function updateMaps(e, map) {
-	console.log('runs')
 	;(map === 'city'
 		? cityMap
 		: hotelMap
