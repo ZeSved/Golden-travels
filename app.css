@@ -91,35 +91,34 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20vh;
+  justify-content: center;
+  gap: 30vh;
   margin-top: 30vh;
-  margin-bottom: 15vh;
+  margin-bottom: 30vh;
   width: 100%;
 
   section {
-    display: flex;
-    justify-content: space-between;
-    gap: 1rem;
-    width: fit-content;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    column-gap: 2rem;
+    width: 100%;
     max-width: 80vw;
-    padding: 1rem;
 
-    div {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
+    h2 {
+      grid-row: 1;
+    }
 
-      h2,
-      p {
-        width: 90%;
-      }
+    p {
+      margin-top: auto;
+      grid-row: 3;
+      height: fit-content;
     }
 
     img {
-      position: relative;
-      width: 25vw;
+      grid-row: span 3;
+      width: 20rem;
       aspect-ratio: 1.52 / 1;
-      /* border-radius: 8px; */
       transition: all 200ms;
       background-color: #fff;
       transform: rotateZ(-8deg);
@@ -149,6 +148,12 @@ main {
     }
 
     &:nth-child(1) {
+
+      h2,
+      p {
+        grid-column: span 3;
+      }
+
       &.slide-in {
         animation-name: slide-in-right;
       }
@@ -159,6 +164,8 @@ main {
 
       img {
         transform: rotateZ(-8deg);
+        grid-column: 4 / span 2;
+        margin-left: auto;
 
         &:hover {
           transform: scale(1.1, 1.1) rotateZ(-8deg);
@@ -167,12 +174,11 @@ main {
     }
 
     &:nth-child(2) {
-      flex-direction: row-reverse;
 
-      div>p,
-      div>h2 {
+      h2,
+      p {
+        grid-column: 3 / span 3;
         text-align: right;
-        margin-left: auto;
       }
 
       &.slide-in {
@@ -184,6 +190,7 @@ main {
       }
 
       img {
+        grid-column: 1 / span 2;
         transform: rotateZ(8deg);
 
         &:hover {
@@ -230,5 +237,113 @@ main {
 
   to {
     transform: scaleY(1);
+  }
+}
+
+@media screen and (max-width: 940px) {
+  main {
+    section {
+      display: grid;
+      /* grid-template-columns: repeat(1, 1fr); */
+      grid-template-columns: 1fr;
+      grid-template-rows: repeat(4, 1fr);
+      width: fit-content;
+      column-gap: 0;
+
+      &:nth-child(1),
+      &:nth-child(2) {
+        >h2 {
+          grid-row: 1;
+          text-align: center;
+          width: 100%;
+          margin: 0;
+        }
+
+        >p {
+          grid-row: 4;
+          text-align: center;
+          width: 100%;
+          margin: 0;
+        }
+
+        >img {
+          grid-row: 2 / span 2;
+          grid-column: 1;
+          margin: 0;
+          transform: rotateZ(0deg);
+        }
+      }
+
+      /* &:nth-child(1),
+      &:nth-child(2) {
+  
+        &.slide-in,
+        &.slide-out {
+          animation-duration: .5s;
+        }
+  
+        &.slide-in {
+          opacity: 1;
+          transform: translateX(0);
+        }
+  
+        &.slide-out {
+          opacity: 0;
+          transform: translateX(300px);
+        }
+      }
+  
+      &:nth-child(1) {
+  
+        h2,
+        p {
+          grid-column: span 3;
+        }
+  
+        &.slide-in {
+          animation-name: slide-in-right;
+        }
+  
+        &.slide-out {
+          animation-name: slide-out-right;
+        }
+  
+        img {
+          transform: rotateZ(-8deg);
+          grid-column: 4 / span 2;
+          margin-left: auto;
+  
+          &:hover {
+            transform: scale(1.1, 1.1) rotateZ(-8deg);
+          }
+        }
+      }
+  
+      &:nth-child(2) {
+  
+        h2,
+        p {
+          grid-column: 3 / span 3;
+          text-align: right;
+        }
+  
+        &.slide-in {
+          animation-name: slide-in-left;
+        }
+  
+        &.slide-out {
+          animation-name: slide-out-left;
+        }
+  
+        img {
+          grid-column: 1 / span 2;
+          transform: rotateZ(8deg);
+  
+          &:hover {
+            transform: scale(1.1, 1.1) rotateZ(8deg);
+          }
+        }
+      } */
+    }
   }
 }
