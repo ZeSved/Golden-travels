@@ -48,12 +48,22 @@ hamburgerMenu.addEventListener('click', () => {
 	}
 })
 
-hamburgerMenu.addEventListener('blur', () => (navBar.className = 'hide'))
+window.addEventListener('mousedown', (e) => {
+	if (
+		e.target.id === 'hamburger-menu' ||
+		e.target.parentNode.id === 'nav-bar' ||
+		e.target.parentNode.id === 'hamburger-menu'
+	)
+		return
+
+	navBar.className = 'hide'
+	hamburgerMenu.blur()
+})
 
 function changeImages(elm) {
-	const path = images[Math.floor(Math.random() * (images.length - 1 - 0 + 1) + 0)]
+	const path = images[Math.floor(Math.random() * images.length)]
 
-	if (elm.src.includes(path)) {
+	if (elm.src.includes(path) || path === undefined) {
 		changeImages(elm)
 	} else {
 		elm.src = path

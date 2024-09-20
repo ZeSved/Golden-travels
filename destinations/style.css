@@ -209,7 +209,6 @@ h1 {
 #calendar,
 #info-form {
   animation: reveal 1.6s ease-in-out;
-  max-width: 81vw;
   margin-inline: auto;
 
   &.hidden {
@@ -217,6 +216,11 @@ h1 {
   }
 
   overflow-y: hidden;
+}
+
+#location,
+#info-form {
+  max-width: 81vw;
 }
 
 #location {
@@ -498,15 +502,36 @@ input {
     }
   }
 
-  button {
+  #last {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
     width: 90%;
-    margin-inline: auto;
-    padding: 1rem;
-    color: black;
-    font-weight: 700;
-    font-size: 1rem;
-    background: var(--gradient);
-    border-radius: 8px;
+
+    ul {
+      width: 100%;
+      height: fit-content;
+      /* display: flex;
+      flex-direction: column; */
+
+      li {
+        /* list-style: disc; */
+        color: red;
+        width: 100%;
+        text-align: center;
+      }
+    }
+
+    button {
+      width: 100%;
+      margin-inline: auto;
+      padding: 1rem;
+      color: black;
+      font-weight: 700;
+      font-size: 1rem;
+      background: var(--gradient);
+      border-radius: 8px;
+    }
   }
 }
 
@@ -569,6 +594,53 @@ input {
     button {
       margin-inline: 0;
       padding: 0;
+    }
+  }
+}
+
+@media screen and (max-width: 810px) {
+  #calendar {
+    width: 100vw;
+    height: 90vh;
+
+    #days p {
+      width: 2.1rem;
+    }
+
+    .date-grid {
+      background-color: var(--secondary);
+      border: 1px solid var(--secondary);
+      gap: 1px;
+
+      div {
+        border: none;
+        border-radius: 0;
+        padding: 0;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  #calendar {
+    width: 100vw;
+    height: 90vh;
+    padding-inline: 1px;
+
+    #days p {
+      width: 2.1rem;
+    }
+
+    .date-grid {
+      background-color: var(--secondary);
+      border: 1px solid var(--secondary);
+      gap: 1px;
+
+      div {
+        border: none;
+        border-radius: 0;
+        padding: 0;
+      }
     }
   }
 }

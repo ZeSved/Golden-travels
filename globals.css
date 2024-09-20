@@ -103,7 +103,6 @@ header {
     width: 100vw;
     height: fit-content;
     display: flex;
-    /* flex-direction: column; */
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
@@ -268,6 +267,38 @@ footer {
         width: 3rem;
       }
     }
+
+    /* &:has(>nav>#hamburger-menu:focus)+nav,
+    &:has(>nav>#hamburger-menu:not(:focus))+nav:focus {
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      width: 100vw;
+      height: fit-content;
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      gap: 1rem;
+      padding-top: 5rem;
+      background-color: var(--secondary);
+
+      a {
+        padding: .5rem 1rem;
+        border: 2px solid white;
+        border-radius: 100vh;
+        text-decoration: none;
+        line-break: none;
+        word-break: none;
+      }
+    }
+
+
+    &:has(>nav>#hamburger-menu:not(:focus))+nav {
+      display: none;
+    } */
   }
 }
 

@@ -7,6 +7,7 @@ const previous = document.querySelector('.previous')
 const next = document.querySelector('.next')
 const yearDisplay = document.querySelector('.year')
 const monthDisplay = document.querySelector('.month')
+const dayList = document.getElementById('days')
 
 const eventListeners = [
 	[next, 1],
@@ -36,6 +37,12 @@ monthDisplay.textContent = capitalizeFirst(
 eventListeners.forEach((item) => {
 	item[0].addEventListener('click', () => changeMonth(item[1]))
 })
+
+if (window.innerWidth <= 810) {
+	Array.from(dayList.children).forEach((day) => {
+		day.textContent = day.textContent.substring(0, 3)
+	})
+}
 
 function changeMonth(amountChanged) {
 	if (amountChanged === -1 && difference.month === 0) {

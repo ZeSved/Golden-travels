@@ -42,7 +42,7 @@
   </div>
 
 
-  <div id="location" class="current">
+  <div id="location" class="hidden">
     <div class="selection">
       <h3>City</h3>
       <input id="city-input" type="text">
@@ -78,46 +78,76 @@
     <div class="date-grid" id="date-grid"></div>
   </div>
 
-  <div id="info-form" class="hidden">
+  <div id="info-form" class="current">
     <form action="">
       <fieldset id="personal">
         <legend>Personal</legend>
-        <div><label for="first-name">First name</label><span class="req">*</span><input placeholder="Type to begin..."
-            type="text" name="first-name" id="first-name" required></div>
-        <div><label for="last-name">Last name</label><span class="req">*</span><input placeholder="Type to begin..."
-            type="text" name="last-name" id="last-name" required></div>
-        <div><label for="age">Age</label><span class="req">*</span><input placeholder="Type to begin..." type="number"
-            name="age" min="18" id="age" required></div>
+        <div>
+          <label for="first-name">First name</label>
+          <span class="req">*</span>
+          <input placeholder="Type to begin..." type="text" name="first-name" id="first-name" required>
+        </div>
+        <div>
+          <label for="last-name">Last name</label>
+          <span class="req">*</span>
+          <input placeholder="Type to begin..." type="text" name="last-name" id="last-name" required>
+        </div>
+        <div>
+          <label for="age">Age</label>
+          <span class="req">*</span>
+          <input placeholder="Type to begin..." type="number" name="age" min="18" id="age" required>
+        </div>
       </fieldset>
 
       <fieldset id="contact">
         <legend>Contact</legend>
-        <div><label for="email">Email</label><span class="req">*</span><input placeholder="just.example@gmail.com"
-            type="email" name="email" id="email" required></div>
-        <div><label for="phone-number">Phone number</label><span class="req">*</span><input
-            placeholder="Type to begin..." type="tel" name="phone-number" id="phone-number" minlength="7" maxlength="15"
-            required></div>
+        <div>
+          <label for="email">Email</label>
+          <span class="req">*</span>
+          <input placeholder="just.example@gmail.com" type="email" name="email" id="email" required>
+        </div>
+        <div>
+          <label for="phone-number">Phone number</label>
+          <span class="req">*</span>
+          <input placeholder="Type to begin..." type="tel" name="phone-number" id="phone-number" minlength="7"
+            maxlength="15" required>
+        </div>
       </fieldset>
 
-      <div><label for="other">Anything extra you want us to know?</label><textarea
-          placeholder="Help us make your first journey the best..." name="other" id=""></textarea></div>
+      <div>
+        <label for="other">Anything extra you want us to know?</label>
+        <textarea placeholder="Help us make your first journey the best..." name="other" id=""></textarea>
+      </div>
 
       <fieldset id="payment">
         <legend>Payment</legend>
-        <div><label for="card-name">Card holder name</label><span class="req">*</span><input
-            placeholder="Type to begin..." type="text" name="card-name" id="card-name"></div>
-        <div><label for="card-number">Card number</label><span class="req">*</span><input
-            placeholder="XXXX XXXX XXXX XXXX" type="text" name="card-number" minlength="12" maxlength="19"
+        <div>
+          <label for="card-name">Card holder name</label>
+          <span class="req">*</span>
+          <input placeholder="Type to begin..." type="text" name="card-name" id="card-name">
+        </div>
+        <div>
+          <label for="card-number">Card number</label>
+          <span class="req">*</span>
+          <input placeholder="XXXX XXXX XXXX XXXX" type="number" name="card-number" minlength="12" maxlength="19"
             id="card-number" required>
         </div>
-        <div><label for="ccv">Card CCV</label><span class="req">*</span><input placeholder="XXXX" type="text" id="ccv"
-            name="ccv" minlength="3" maxlength="4" required></div>
-        <div><label for="expires">Expiration date</label><span class="req">*</span>
+        <div>
+          <label for="ccv">Card CCV</label>
+          <span class="req">*</span>
+          <input placeholder="XXXX" type="number" id="ccv" name="ccv" minlength="3" maxlength="4" required>
+        </div>
+        <div>
+          <label for="expires">Expiration date</label>
+          <span class="req">*</span>
           <input placeholder="MM/YY" type="text" name="expires" id="expires" required>
         </div>
       </fieldset>
 
-      <button id="send">Send</button>
+      <div id="last">
+        <ul id="warning"></ul>
+        <button id="send">Send</button>
+      </div>
     </form>
   </div>
 
@@ -125,7 +155,7 @@
   <footer>
     <div id="contact">
       <h2>Contact</h2>
-      <a href="tel+46737574755" class="p1">+46 73 757 47 55</p>
+      <a href="tel:+46737574755" class="p1">+46 73 757 47 55</p>
         <a href="mailto:contact@goldentravel.com" class="p2">contact@goldentravel.com</a>
         <a class="p3">34st golden street 16795</a>
     </div>
