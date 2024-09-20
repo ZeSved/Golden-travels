@@ -123,6 +123,7 @@ header {
   }
 }
 
+
 footer {
   display: flex;
   justify-content: space-around;
@@ -145,8 +146,10 @@ footer {
   }
 
   #contact {
-    p {
+    a {
+      padding: 0;
       padding-left: 1.5rem;
+      border: none;
     }
 
     ::before {
@@ -264,6 +267,58 @@ footer {
       a:has(img) {
         width: 3rem;
       }
+    }
+  }
+}
+
+@media screen and (max-width: 550px) {
+  footer {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    gap: 2rem;
+
+    margin-top: 15vh;
+    padding-block: 2rem;
+
+    height: fit-content;
+
+    background-color: var(--secondary);
+
+    #contact,
+    #creator {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      gap: 1rem;
+
+      p,
+      h2,
+      a {
+        padding: 0;
+        text-align: center;
+        width: fit-content;
+      }
+
+      ::before,
+      ::after {
+        content: none;
+      }
+    }
+
+    #contact {
+      a {
+        /* padding: 0; */
+        text-decoration: none;
+        border: none;
+      }
+    }
+
+    img {
+      width: 90vw;
     }
   }
 }

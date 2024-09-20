@@ -93,7 +93,6 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
   max-width: 81vw;
   margin-inline: auto;
   margin-bottom: 10vh;
@@ -198,7 +197,6 @@ h1 {
     background-color: var(--primary);
     border-radius: 8px;
     padding: .5rem 1rem;
-    margin-inline: 2rem;
 
     img {
       height: 2.5rem;
@@ -221,83 +219,23 @@ h1 {
   overflow-y: hidden;
 }
 
-/* #location {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  grid-template-rows: 1fr 1fr;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-inline: 1rem;
-  width: 72vw;
-  gap: 1rem;
-  overflow-x: hidden;
-
-
-  iframe {
-    grid
-    aspect-ratio: 1;
-    border-radius: 8px;
-    background-color: var(--secondary);
-    grid-row: 1 / span 2;
-
-    &:first-child {
-      grid-column: 1 / 2;
-    }
-
-    &:last-child {
-      grid-column: 5 / 6;
-    }
-  }
-
-  div {
-    width: fit-content;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    margin-inline: auto;
-    grid-column: 3 / 4;
-
-    align-items: center;
-    justify-content: center;
-
-    &:first-of-type {
-      grid-row: 1;
-    }
-
-    &:last-of-type {
-      grid-row: 2;
-    }
-  }
-} */
-
 #location {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-inline: 1rem;
-  width: 100%;
 
-  iframe {
-    width: 33%;
-    aspect-ratio: 3 / 2;
-    border-radius: 8px;
-    background-color: var(--secondary);
-  }
-
-  #location-input {
-    height: 30vh;
+  .selection {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
 
-    div {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-
-      align-items: center;
-      justify-content: center;
+    iframe {
+      width: calc((81vw - 2rem) / 2);
+      aspect-ratio: 3 / 2;
+      border-radius: 8px;
+      background-color: var(--secondary);
     }
   }
 }
@@ -611,8 +549,26 @@ input {
   }
 }
 
-@media screen and (max-width: 1070px) {
+@media screen and (max-width: 820px) {
   #location {
     flex-direction: column;
+    gap: 2rem;
+
+    .selection {
+      iframe {
+        width: 81vw;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 360px) {
+  #step-indicator {
+    gap: 0;
+
+    button {
+      margin-inline: 0;
+      padding: 0;
+    }
   }
 }
