@@ -4,7 +4,7 @@ const warning = document.getElementById('warning')
 const nameRegExp = new RegExp(/^[^0-9!#"¤%&/()=?@£$€{[\]}\^*',.:;<>|\+´`§½_µ]+$/)
 const numberRegExp = new RegExp(/^\d+$/)
 const emailRegExp = new RegExp(
-	/([a-zA-Z0-9]+)([\_\.\-{1}])?([a-zA-Z0-9]+)\@([a-zA-Z0-9]+)([\.])([a-zA-Z\.]+)/g
+	/([a-zA-Z0-9]+)([\_\.\-{1}])?([a-zA-Z0-9]+)\@([a-zA-Z0-9]+)([\.])([a-zA-Z\.]+)/
 )
 
 const inputs = [
@@ -19,7 +19,7 @@ const inputs = [
 			],
 			[
 				(elm) => {
-					return elm.length > 0
+					return elm.value.length > 0
 				},
 				'Please write your first name.',
 			],
@@ -36,7 +36,7 @@ const inputs = [
 			],
 			[
 				(elm) => {
-					return elm.length > 0
+					return elm.value.length > 0
 				},
 				'Please write your last name.',
 			],
@@ -70,7 +70,7 @@ const inputs = [
 			],
 			[
 				(elm) => {
-					return elm.length > 0
+					return elm.value.length > 0
 				},
 				'Please write your email address.',
 			],
@@ -78,6 +78,20 @@ const inputs = [
 	],
 	[
 		'phone-number',
+		[
+			[
+				(elm) => {
+					return 7 <= elm.value.length && elm.value.length <= 15
+				},
+				'Phone number has to have between 7 and 15 numbers.',
+			],
+			[
+				(elm) => {
+					return numberRegExp.test(elm.value)
+				},
+				'Phone number can only contain numbers.',
+			],
+		],
 		numberRegExp,
 		'Phone number has to be between 7 and 15 numbers long.',
 		'Phone number can only contain numbers.',
@@ -93,7 +107,7 @@ const inputs = [
 			],
 			[
 				(elm) => {
-					return elm.length > 0
+					return elm.value.length > 0
 				},
 				'Please write the name written on your card.',
 			],
@@ -138,22 +152,20 @@ const inputs = [
 send.addEventListener('click', (e) => {
 	e.preventDefault()
 
+	while (warning.firstChild) {
+		warning.removeChild(warning.firstChild)
+	}
+
 	inputs.forEach((inp) => {
 		const elm = document.getElementById(inp[0])
-		console.log(inp[1])
 
 		inp[1].forEach((cond) => {
 			if (!cond[0](elm)) {
 				const li = document.createElement('li')
-				console.log(li)
 				const text = document.createTextNode(cond[1])
-				console.log(li)
-				warning.appendChild(li.appendChild(text))
-				console.log(li, warning)
+				li.appendChild(text)
+				warning.appendChild(li)
 			}
 		})
-		// if (!document.getElementById(inp[0]).value.match(inp[1])) {
-		// 	alert(`The error occured in ${document.getElementById(inp[0]).value}`)
-		// }
 	})
 })
