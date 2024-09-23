@@ -1,12 +1,15 @@
 const send = document.getElementById('send')
 const warning = document.getElementById('warning')
 
+// Regular expressions given variables so that they can actually be read
 const nameRegExp = new RegExp(/^[^0-9!#"¤%&/()=?@£$€{[\]}\^*',.:;<>|\+´`§½_µ]+$/)
 const numberRegExp = new RegExp(/^\d+$/)
 const emailRegExp = new RegExp(
 	/([a-zA-Z0-9]+)([\_\.\-{1}])?([a-zA-Z0-9]+)\@([a-zA-Z0-9]+)([\.])([a-zA-Z\.]+)/
 )
 
+// Array containing the id of each input field and an array of tests to put their value
+// through and a message to write at the bottom of the form if any of the tests failes
 const inputs = [
 	[
 		'first-name',
@@ -152,6 +155,7 @@ const inputs = [
 send.addEventListener('click', (e) => {
 	e.preventDefault()
 
+	// Removes all previous warnings
 	while (warning.firstChild) {
 		warning.removeChild(warning.firstChild)
 	}
@@ -160,6 +164,7 @@ send.addEventListener('click', (e) => {
 		const elm = document.getElementById(inp[0])
 
 		inp[1].forEach((cond) => {
+			// If current test failed create new warnig for it and append to list
 			if (!cond[0](elm)) {
 				const li = document.createElement('li')
 				const text = document.createTextNode(cond[1])

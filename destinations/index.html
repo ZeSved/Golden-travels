@@ -15,16 +15,25 @@
 </head>
 
 <body>
+  <!-- Header -->
   <header>
     <nav>
-      <a href="/"><img id="logo" src="../meta-images/Group 1.png" alt=""></a>
+      <a href="../"><img id="logo" src="../meta-images/Group 1.png" alt="Golden travel small logo"></a>
+
+      <!-- Hamburger menu for phones -->
       <button id="hamburger-menu"><span></span><span></span><span></span></button>
-      <a href="about/">About</a><a href="destinations/">Destinations</a><a href="history/">My history</a>
+      <a href="../about/">About</a><a href="../destinations/">Destinations</a><a href="../history/">My history</a>
     </nav>
   </header>
-  <nav id="nav-bar" class="hide"><a href="about/">About</a><a href="destinations/">Destinations</a><a href="history/">My
+
+  <!-- Navigation bar for phones -->
+  <nav id="nav-bar" class="hide"><a href="../about/">About</a><a href="../destinations/">Destinations</a><a
+      href="../history/">My
       history</a></nav>
+
   <h1 id="title">Choose where</h1>
+
+  <!-- Form pages progress bar -->
   <div id="step-indicator">
     <button id="previous"><img src="../meta-images/left arrow.png" alt=""></button>
     <div text="1" class="step active" id="step-1">
@@ -41,8 +50,8 @@
     <button id="next"><img src="../meta-images/right arrow.png" alt=""></button>
   </div>
 
-
-  <div id="location" class="hidden">
+  <!-- Travel destination selection -->
+  <div id="location" class="current">
     <div class="selection">
       <h3>City</h3>
       <input id="city-input" type="text">
@@ -59,6 +68,7 @@
     </div>
   </div>
 
+  <!-- Travel start and end date selection -->
   <div id="calendar" class="hidden">
     <div>
       <button class="previous"><img src="../meta-images/arrows.svg" alt=""></button>
@@ -78,8 +88,10 @@
     <div class="date-grid" id="date-grid"></div>
   </div>
 
-  <div id="info-form" class="current">
+  <!-- Traveling person important info gathering -->
+  <div id="info-form" class="hidden">
     <form action="">
+      <!-- Personal questions -->
       <fieldset id="personal">
         <legend>Personal</legend>
         <div>
@@ -99,6 +111,7 @@
         </div>
       </fieldset>
 
+      <!-- Contact questions -->
       <fieldset id="contact">
         <legend>Contact</legend>
         <div>
@@ -119,6 +132,7 @@
         <textarea placeholder="Help us make your first journey the best..." name="other" id=""></textarea>
       </div>
 
+      <!-- Payment details -->
       <fieldset id="payment">
         <legend>Payment</legend>
         <div>
@@ -144,18 +158,20 @@
         </div>
       </fieldset>
 
+      <!-- Final send button and warnings about incorrecly filled out form questions -->
       <div id="last">
         <ul id="warning"></ul>
-        <button id="send">Send</button>
+        <input type="button" id="send" value="Send">
       </div>
     </form>
   </div>
 
 
+  <!-- Footer -->
   <footer>
     <div id="contact">
       <h2>Contact</h2>
-      <a href="tel:+46737574755" class="p1">+46 73 757 47 55</p>
+      <a href="tel+46737574755" class="p1">+46 73 757 47 55</p>
         <a href="mailto:contact@goldentravel.com" class="p2">contact@goldentravel.com</a>
         <a class="p3">34st golden street 16795</a>
     </div>
@@ -163,7 +179,7 @@
       <h2>Creator</h2>
       <p>Timothy Korell</p>
     </div>
-    <img src="../meta-images/logo.png" alt="">
+    <img src="../meta-images/logo.png" alt="Golden travel big logo">
   </footer>
 </body>
 

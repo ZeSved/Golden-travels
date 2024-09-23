@@ -7,6 +7,7 @@ h1 {
   text-align: center;
 }
 
+/* Animations */
 @keyframes widen {
   from {
     width: 101%;
@@ -29,18 +30,6 @@ h1 {
     width: 101%;
     left: -0.5%;
   }
-}
-
-@property --color {
-  syntax: '<angle>';
-  inherits: false;
-  initial-value: 270deg;
-}
-
-@property --transparent {
-  syntax: '<angle>';
-  inherits: false;
-  initial-value: 0deg;
 }
 
 @keyframes forward {
@@ -89,6 +78,20 @@ h1 {
   }
 }
 
+/* Custom properties for animation otherwise impossible with css */
+@property --color {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 270deg;
+}
+
+@property --transparent {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+
+/* Progress bar */
 #step-indicator {
   display: flex;
   justify-content: center;
@@ -96,11 +99,11 @@ h1 {
   max-width: 81vw;
   margin-inline: auto;
   margin-bottom: 10vh;
-  gap: 8px;
+  gap: var(--size-3);
 
   .bar {
     width: 30%;
-    height: 8px;
+    height: var(--size-3);
     background: var(--gradient);
     border-radius: 100vh;
     position: relative;
@@ -130,7 +133,7 @@ h1 {
   }
 
   .step {
-    padding: 1rem;
+    padding: var(--size-2);
     border-radius: 100vh;
     background-color: var(--secondary);
     position: relative;
@@ -166,7 +169,7 @@ h1 {
       background-color: var(--secondary);
       width: 66%;
       height: 66%;
-      padding: .5rem;
+      padding: var(--size-3);
     }
 
     background: conic-gradient(from var(--color),
@@ -195,8 +198,8 @@ h1 {
 
   button {
     background-color: var(--primary);
-    border-radius: 8px;
-    padding: .5rem 1rem;
+    border-radius: var(--size-3);
+    padding: var(--size-3) var(--size-2);
 
     img {
       height: 2.5rem;
@@ -223,6 +226,7 @@ h1 {
   max-width: 81vw;
 }
 
+/* Travel destination selection */
 #location {
   display: flex;
   justify-content: space-between;
@@ -233,12 +237,13 @@ h1 {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 1rem;
+    gap: var(--size-2);
 
+    /* Maps */
     iframe {
-      width: calc((81vw - 2rem) / 2);
+      width: calc((81vw - var(--size-1)) / 2);
       aspect-ratio: 3 / 2;
-      border-radius: 8px;
+      border-radius: var(--size-3);
       background-color: var(--secondary);
     }
   }
@@ -249,25 +254,28 @@ input {
   outline: none;
   background-color: transparent;
   color: white;
-  border-radius: 4px;
-  padding: 4px;
+  border-radius: var(--size-4);
+  padding: var(--size-4);
   text-align: center;
 }
 
+/* Traveling start and end date selection */
 #calendar {
   width: 80vw;
   height: 80vh;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  padding-inline: 2rem;
+  gap: var(--size-2);
+  padding-inline: var(--size-1);
   margin-inline: auto;
 
+  /* Day display */
   #days p {
     width: 5.5rem;
     text-align: center;
   }
 
+  /* Month selection */
   div:not(.date-grid) {
     display: flex;
     justify-content: space-around;
@@ -280,7 +288,7 @@ input {
       cursor: pointer;
       width: 3rem;
       aspect-ratio: 1;
-      font-size: 2rem;
+      font-size: var(--size-1);
 
       img {
         width: 100%;
@@ -293,6 +301,7 @@ input {
     }
   }
 
+  /* The actual calendar */
   .date-grid {
     display: grid;
     height: 100%;
@@ -301,6 +310,7 @@ input {
     grid-template-rows: repeat(6, 1fr);
     gap: 2px;
 
+    /* Divs showing days inside of month */
     div {
       animation: rotate-days .2s ease-out;
       position: relative;
@@ -310,10 +320,8 @@ input {
       background-color: var(--primary);
       border: 2px solid var(--secondary);
       border-radius: 10px;
-      padding: .5rem;
+      padding: var(--size-3);
       cursor: pointer;
-
-
 
       &.otherMonth,
       &.old-days,
@@ -321,13 +329,14 @@ input {
         cursor: default;
       }
 
+      /* Parahgraps showing days */
       p {
         height: fit-content;
         transition: all .2s;
         user-select: none;
 
         &.big {
-          font-size: 2rem;
+          font-size: var(--size-1);
         }
 
         &.small {
@@ -381,6 +390,7 @@ input {
   }
 }
 
+/* Traveling person important info gathering */
 #info-form {
   width: 40rem;
   height: fit-content;
@@ -400,16 +410,17 @@ input {
     #payment {
       width: 90%;
       height: fit-content;
-      gap: 1rem;
-      padding: 2rem;
-      border-radius: 2rem;
+      gap: var(--size-2);
+      padding: var(--size-1);
+      border-radius: var(--size-1);
       border: 2px dashed var(--secondary);
 
       legend {
-        padding-inline: 1rem;
-        margin-left: 2rem;
+        padding-inline: var(--size-2);
+        margin-left: var(--size-1);
       }
 
+      /* Question fields */
       div {
         display: grid;
         grid-template-rows: repeat(2, 1fr);
@@ -441,6 +452,7 @@ input {
       }
     }
 
+    /* Personal info */
     #personal {
       display: grid;
       grid-template-rows: repeat(2, 1fr);
@@ -456,6 +468,7 @@ input {
       }
     }
 
+    /* Contact info */
     #contact {
       width: 90%;
       display: flex;
@@ -467,13 +480,14 @@ input {
       }
     }
 
+    /* Optional text field */
     div:has(textarea) {
       width: 100%;
       display: flex;
       justify-content: center;
       align-items: center;
       flex-direction: column;
-      gap: 4px;
+      gap: var(--size-4);
 
       textarea {
         width: 90%;
@@ -482,11 +496,12 @@ input {
         outline: none;
         border: 2px solid var(--secondary);
         padding: .4rem .8rem;
-        border-radius: 4px;
+        border-radius: var(--size-4);
         resize: none;
       }
     }
 
+    /* Payment info */
     #payment {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -502,39 +517,39 @@ input {
     }
   }
 
+  /* Send button and incorrect form input warnings */
   #last {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: var(--size-1);
     width: 90%;
 
     ul {
       width: 100%;
       height: fit-content;
-      /* display: flex;
-      flex-direction: column; */
 
       li {
-        /* list-style: disc; */
         color: red;
         width: 100%;
         text-align: center;
       }
     }
 
-    button {
+    input {
       width: 100%;
       margin-inline: auto;
-      padding: 1rem;
+      padding: var(--size-2);
       color: black;
       font-weight: 700;
-      font-size: 1rem;
+      font-size: var(--size-2);
       background: var(--gradient);
-      border-radius: 8px;
+      border-radius: var(--size-3);
+      cursor: pointer;
     }
   }
 }
 
+/* Media queries for responsiveness */
 @media screen and (max-width: 640px) {
   #info-form {
     width: 90%;
@@ -577,7 +592,7 @@ input {
 @media screen and (max-width: 820px) {
   #location {
     flex-direction: column;
-    gap: 2rem;
+    gap: var(--size-1);
 
     .selection {
       iframe {
@@ -604,7 +619,7 @@ input {
     height: 90vh;
 
     #days p {
-      width: 2.1rem;
+      width: 2.var(--size-2);
     }
 
     .date-grid {
@@ -628,7 +643,7 @@ input {
     padding-inline: 1px;
 
     #days p {
-      width: 2.1rem;
+      width: 2.var(--size-2);
     }
 
     .date-grid {

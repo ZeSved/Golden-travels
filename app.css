@@ -4,6 +4,7 @@ body {
   background-color: var(--primary);
 }
 
+/* Animations */
 @keyframes slide-in-right {
   from {
     opacity: 0;
@@ -76,6 +77,17 @@ body {
   }
 }
 
+@keyframes grow {
+  from {
+    transform: scaleY(0);
+  }
+
+  to {
+    transform: scaleY(1);
+  }
+}
+
+/* Hero */
 #hero {
   display: flex;
   flex-direction: column;
@@ -117,6 +129,7 @@ body {
   }
 }
 
+/* Main content */
 main {
   display: flex;
   flex-direction: column;
@@ -131,7 +144,7 @@ main {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     grid-template-rows: repeat(3, 1fr);
-    column-gap: 2rem;
+    column-gap: var(--size-1);
     width: 100%;
     max-width: 80vw;
 
@@ -152,7 +165,7 @@ main {
       transition: all 200ms;
       background-color: #fff;
       transform: rotateZ(-8deg);
-      padding: 1rem;
+      padding: var(--size-2);
       padding-bottom: 3rem;
       opacity: .9;
       cursor: pointer;
@@ -231,6 +244,7 @@ main {
   }
 }
 
+/* Encouraged link to the booking page */
 #destinations {
   margin-inline: auto;
   width: fit-content;
@@ -238,13 +252,13 @@ main {
   align-items: center;
   gap: 9vw;
 
-  padding-bottom: 2rem;
+  padding-bottom: var(--size-1);
 
   p {
-    font-size: 2rem;
+    font-size: var(--size-1);
     font-weight: bold;
     background-color: var(--primary);
-    padding-inline: 1rem;
+    padding-inline: var(--size-2);
   }
 
   button {
@@ -252,24 +266,15 @@ main {
     outline: none;
     background-color: white;
     color: black;
-    padding: .5rem 1rem;
+    padding: var(--size-3) var(--size-2);
     font-size: 1.8rem;
     font-weight: bold;
     cursor: pointer;
-    border-radius: 8px;
+    border-radius: var(--size-3);
   }
 }
 
-@keyframes grow {
-  from {
-    transform: scaleY(0);
-  }
-
-  to {
-    transform: scaleY(1);
-  }
-}
-
+/* Media queries for responsiveness */
 @media screen and (max-width: 940px) {
   main {
     section {
@@ -314,7 +319,7 @@ main {
     }
 
     #motto {
-      margin-top: 1rem;
+      margin-top: var(--size-2);
       position: relative;
       z-index: 1;
       width: 50vw;
@@ -325,10 +330,10 @@ main {
         top: 50%;
         left: 50%;
         translate: -50% -50%;
-        height: calc(100% + 1rem);
-        width: calc(100% + 1rem);
+        height: calc(100% + var(--size-2));
+        width: calc(100% + var(--size-2));
         background-color: #00000080;
-        border-radius: 8px;
+        border-radius: var(--size-3);
         z-index: -1;
       }
     }

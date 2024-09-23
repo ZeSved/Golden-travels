@@ -5,6 +5,7 @@
  * @param Third_place - Classes to remove
  */
 
+// Toggles given classes for given elements
 export function toggleClassnames(...classArrays) {
 	Array.from(classArrays).forEach((item) => {
 		item[0].classList.add(item[1])
