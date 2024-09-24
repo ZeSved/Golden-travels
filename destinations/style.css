@@ -196,7 +196,7 @@ h1 {
     }
   }
 
-  button {
+  button:not(.step) {
     background-color: var(--primary);
     border-radius: var(--size-3);
     padding: var(--size-3) var(--size-2);

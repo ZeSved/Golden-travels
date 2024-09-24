@@ -13,6 +13,7 @@ const bar_1 = document.getElementById('bar-1')
 const bar_2 = document.getElementById('bar-2')
 const step_2 = document.getElementById('step-2')
 const step_3 = document.getElementById('step-3')
+const steps = document.querySelectorAll('.step')
 
 const tripLocation = document.getElementById('location')
 const dates = document.getElementById('calendar')
@@ -66,6 +67,29 @@ previous.addEventListener('click', () => handleAnimations(false))
 cityInput.addEventListener('change', (e) => updateMaps(e, 'city'))
 hotelInput.addEventListener('change', (e) => updateMaps(e, 'hotel'))
 
+// Assigns event listeners so that you can use the progress circles to navigate
+Array.from(steps).forEach((s) => {
+	s.addEventListener('click', () => {
+		const currentLength = Math.ceil(currentlyActive.length / 2)
+		const text = parseInt(s.getAttribute('text'))
+		if (text === currentLength) return
+
+		if (text === currentLength + 1) handleAnimations(true)
+
+		if (text === currentLength - 1) handleAnimations(false)
+
+		if (text === currentLength + 2) {
+			handleAnimations(true)
+			handleAnimations(true)
+		}
+
+		if (text === currentLength - 2) {
+			handleAnimations(false)
+			handleAnimations(false)
+		}
+	})
+})
+
 // Inital map src set
 cityMap.src = `https://www.google.com/maps/embed/v1/place?key=AIzaSyBJJNyhCEg8sxLsO6YMZ-GMFTT-c5-Cz_Q&q=stockholm`
 hotelMap.src = `https://www.google.com/maps/embed/v1/place?key=AIzaSyBJJNyhCEg8sxLsO6YMZ-GMFTT-c5-Cz_Q&q=grand+hotel`
@@ -118,5 +142,5 @@ function handleAnimations(goToNext) {
 
 	// Sets the heading to the correct text
 	title.textContent =
-		titleContents[currentlyActive.length === 1 ? 1 : Math.floor(currentlyActive.length / 2)]
+		titleContents[currentlyActive.length === 1 ? 0 : Math.floor(currentlyActive.length / 2)]
 }
