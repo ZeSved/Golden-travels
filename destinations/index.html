@@ -35,19 +35,19 @@
 
   <!-- Form pages progress bar -->
   <div id="step-indicator">
-    <button id="previous"><img src="../meta-images/left arrow.png" alt=""></button>
+    <button id="previous"><img src="../meta-images/leftarrow.png" alt=""></button>
     <button text="1" class="step active" id="step-1">
-      <p>1</p>
+      1
     </button>
     <div class="bar" id="bar-1"></div>
     <button text="2" class="step" id="step-2">
-      <p>2</p>
+      2
     </button>
     <div class="bar" id="bar-2"></div>
     <button text="3" class="step" id="step-3">
-      <p>3</p>
+      3
     </button>
-    <button id="next"><img src="../meta-images/right arrow.png" alt=""></button>
+    <button id="next"><img src="../meta-images/rightarrow.png" alt=""></button>
   </div>
 
   <!-- Travel destination selection -->
@@ -55,15 +55,13 @@
     <div class="selection">
       <h3>City</h3>
       <input id="city-input" type="text">
-      <iframe id="city-map" frameborder="0" style="border:0" referrerpolicy="no-referrer-when-downgrade" src=""
-        allowfullscreen>
+      <iframe id="city-map" style="border:0" referrerpolicy="no-referrer-when-downgrade" allowfullscreen>
       </iframe>
     </div>
     <div class="selection">
       <h3>Hotel</h3>
       <input id="hotel-input" type="text">
-      <iframe id="hotel-map" frameborder="0" style="border:0" referrerpolicy="no-referrer-when-downgrade" src=""
-        allowfullscreen>
+      <iframe id="hotel-map" style="border:0" referrerpolicy="no-referrer-when-downgrade" allowfullscreen>
       </iframe>
     </div>
   </div>
@@ -90,7 +88,7 @@
 
   <!-- Traveling person important info gathering -->
   <div id="info-form" class="hidden">
-    <form action="">
+    <form>
       <!-- Personal questions -->
       <fieldset id="personal">
         <legend>Personal</legend>
@@ -129,7 +127,7 @@
 
       <div>
         <label for="other">Anything extra you want us to know?</label>
-        <textarea placeholder="Help us make your first journey the best..." name="other" id=""></textarea>
+        <textarea placeholder="Help us make your first journey the best..." name="other"></textarea>
       </div>
 
       <!-- Payment details -->
@@ -143,13 +141,12 @@
         <div>
           <label for="card-number">Card number</label>
           <span class="req">*</span>
-          <input placeholder="XXXX XXXX XXXX XXXX" type="number" name="card-number" minlength="12" maxlength="19"
-            id="card-number" required>
+          <input placeholder="XXXX XXXX XXXX XXXX" type="number" name="card-number" id="card-number" required>
         </div>
         <div>
           <label for="ccv">Card CCV</label>
           <span class="req">*</span>
-          <input placeholder="XXXX" type="number" id="ccv" name="ccv" minlength="3" maxlength="4" required>
+          <input placeholder="XXXX" type="number" id="ccv" name="ccv" required>
         </div>
         <div>
           <label for="expires">Expiration date</label>

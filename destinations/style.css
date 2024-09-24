@@ -133,15 +133,15 @@ h1 {
   }
 
   .step {
-    padding: var(--size-2);
+    padding: var(--size-2) 1.2rem;
     border-radius: 100vh;
     background-color: var(--secondary);
     position: relative;
 
-    p {
+    /* p {
       width: 1.2rem;
       text-align: center;
-    }
+    } */
 
     &::before {
       content: '';
@@ -193,6 +193,7 @@ h1 {
 
     &#step-1.active {
       background: conic-gradient(from 270deg, red 0deg, transparent 0deg 270deg);
+      padding: var(--size-2) 1.4rem;
     }
   }
 
