@@ -87,7 +87,7 @@ header {
     align-items: center;
     gap: var(--size-2);
 
-    #hamburger-menu {
+    .hamburger-menu {
       display: none;
     }
 
@@ -103,7 +103,7 @@ header {
   }
 }
 
-#nav-bar {
+.nav-bar {
 
   &.hide {
     display: none;
@@ -147,8 +147,8 @@ footer {
 
   background-color: var(--secondary);
 
-  #contact,
-  #creator {
+  .contact,
+  .creator {
     display: flex;
     flex-direction: column;
     gap: var(--size-2);
@@ -156,7 +156,7 @@ footer {
     position: relative;
   }
 
-  #contact {
+  .contact {
     a {
       padding: 0;
       padding-left: 1.5rem;
@@ -180,7 +180,7 @@ footer {
     }
   }
 
-  #creator {
+  .creator {
     p {
       padding-right: 1.5rem;
     }
@@ -237,7 +237,7 @@ footer {
 @media screen and (max-width: 470px) {
   header {
     nav {
-      #hamburger-menu {
+      .hamburger-menu {
         --span-h: calc(100% / 5);
 
         width: 2.4rem;
@@ -301,8 +301,8 @@ footer {
 
     background-color: var(--secondary);
 
-    #contact,
-    #creator {
+    .contact,
+    .creator {
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -324,7 +324,7 @@ footer {
       }
     }
 
-    #contact {
+    .contact {
       a {
         text-decoration: none;
         border: none;

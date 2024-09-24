@@ -1,8 +1,10 @@
+import { toggleClassnames } from './destinations/utils.js'
+
 // Elements
 const sectionOne = document.getElementById('first-section')
 const sectionTwo = document.getElementById('second-section')
-const hamburgerMenu = document.getElementById('hamburger-menu')
-const navBar = document.getElementById('nav-bar')
+const hamburgerMenu = document.querySelector('.hamburger-menu')
+const navBar = document.querySelector('.nav-bar')
 
 const photoElements = document.querySelectorAll('.photo')
 
@@ -45,10 +47,10 @@ photoElements.forEach((photo) => {
 
 // Hamburger functionality on phone
 hamburgerMenu.addEventListener('click', () => {
-	if (navBar.className === 'hide') {
-		navBar.className = 'show'
+	if (navBar.classList.contains('hide')) {
+		toggleClassnames([navBar, 'show', 'hide'])
 	} else {
-		navBar.className = 'hide'
+		toggleClassnames([navBar, 'hide', 'show'])
 		hamburgerMenu.blur()
 	}
 })
@@ -58,13 +60,13 @@ hamburgerMenu.addEventListener('click', () => {
 // the navbar
 window.addEventListener('mousedown', (e) => {
 	if (
-		e.target.id === 'hamburger-menu' ||
-		e.target.parentNode.id === 'nav-bar' ||
-		e.target.parentNode.id === 'hamburger-menu'
+		e.target.classList.contains('hamburger-menu') ||
+		e.target.parentNode.classList.contains('nav-bar') ||
+		e.target.parentNode.classList.contains('hamburger-menu')
 	)
 		return
 
-	navBar.className = 'hide'
+	toggleClassnames([navBar, 'show', 'hide'], [navBar, 'hide', 'show'])
 	hamburgerMenu.blur()
 })
 
