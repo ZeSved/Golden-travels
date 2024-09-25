@@ -49,6 +49,7 @@ photoElements.forEach((photo) => {
 hamburgerMenu.addEventListener('click', () => {
 	if (navBar.classList.contains('hide')) {
 		toggleClassnames([navBar, 'show', 'hide'])
+		navBar.style.top = `${window.scrollY}px`
 	} else {
 		toggleClassnames([navBar, 'hide', 'show'])
 		hamburgerMenu.blur()
@@ -66,8 +67,14 @@ window.addEventListener('mousedown', (e) => {
 	)
 		return
 
-	toggleClassnames([navBar, 'show', 'hide'], [navBar, 'hide', 'show'])
+	toggleClassnames([navBar, 'hide', 'show'])
 	hamburgerMenu.blur()
+})
+
+window.addEventListener('scroll', () => {
+	if (navBar.classList.contains('show')) {
+		navBar.style.top = `${window.scrollY}px`
+	}
 })
 
 // Changes the images when clicked on

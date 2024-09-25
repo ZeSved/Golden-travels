@@ -129,8 +129,6 @@ header {
       border: 2px solid white;
       border-radius: 100vh;
       text-decoration: none;
-      line-break: none;
-      word-break: none;
     }
   }
 }
