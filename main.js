@@ -71,6 +71,7 @@ window.addEventListener('mousedown', (e) => {
 	hamburgerMenu.blur()
 })
 
+// Makes sure the phone nav bar follows the scrolling óf the page
 window.addEventListener('scroll', () => {
 	if (navBar.classList.contains('show')) {
 		navBar.style.top = `${window.scrollY}px`
