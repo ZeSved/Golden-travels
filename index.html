@@ -4,9 +4,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="app.css">
+  <link rel="stylesheet" href=".style.css">
   <script type="module" src="main.js" defer></script>
   <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
+  <link rel="preload" as="image"
+    href="images/africa-best-places-to-visit-experience-victoria-falls-zimbabwe-zambia.jpg">
   <title>Golden travel</title>
 </head>
 
@@ -32,14 +34,16 @@
   <div id="hero">
     <img id="logo" src="meta-images/logo.png" alt="company logo">
     <h1 id="motto">The best agency for your first <span class="golden">international</span> journey</h1>
-    <img id="hero-img" src="images/africa-best-places-to-visit-experience-victoria-falls-zimbabwe-zambia.jpg" alt="">
+    <img id="hero-img" src="images/africa-best-places-to-visit-experience-victoria-falls-zimbabwe-zambia.jpg"
+      alt="Hero image">
   </div>
 
   <!-- Main content -->
   <main>
     <section id="first-section" class="slide-out">
       <h2>Why watch a documentary when you can see it with <span class="golden">your own eyes?</span></h2>
-      <img class="photo" tabindex="0" src="images/Chichen-750x400.webp" alt="photo of travel destination">
+      <img class="photo" tabindex="0" loading="lazy" src="images/Chichen-750x400.webp"
+        alt="photo of travel destination">
       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam quasi atque dolorum consequatur corporis
         fuga
         veniam assumenda veritatis est doloremque?</p>
@@ -47,7 +51,7 @@
     <section id="second-section" class="slide-out">
       <h2>Afraid you will miss anything? Don&apos;t worry! We <span class="golden">take care of everything</span> for
         you.</h2>
-      <img class="photo" tabindex="0" src="images/the-great-wall-2190047_960_720-e1517999791900.jpg"
+      <img class="photo" tabindex="0" loading="lazy" src="images/the-great-wall-2190047_960_720-e1517999791900.jpg"
         alt="photo of travel destination">
       <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Similique numquam temporibus earum sequi pariatur.
         Similique eveniet ea animi accusamus neque.</p>
