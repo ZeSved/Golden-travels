@@ -91,8 +91,8 @@ Array.from(steps).forEach((s) => {
 })
 
 // Inital map src set
-cityMap.src = `https://www.google.com/maps/embed/v1/place?key=AIzaSyBJJNyhCEg8sxLsO6YMZ-GMFTT-c5-Cz_Q&q=stockholm`
-hotelMap.src = `https://www.google.com/maps/embed/v1/place?key=AIzaSyBJJNyhCEg8sxLsO6YMZ-GMFTT-c5-Cz_Q&q=grand+hotel`
+// cityMap.src = `https://www.google.com/maps/embed/v1/place?key=AIzaSyBJJNyhCEg8sxLsO6YMZ-GMFTT-c5-Cz_Q&q=stockholm`
+// hotelMap.src = `https://www.google.com/maps/embed/v1/place?key=AIzaSyBJJNyhCEg8sxLsO6YMZ-GMFTT-c5-Cz_Q&q=grand+hotel`
 
 // Function to update the maps
 function updateMaps(e, map) {
