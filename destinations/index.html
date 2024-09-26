@@ -21,7 +21,7 @@
       <a href="../"><img class="logo" src="../meta-images/smallLogo.png" alt="Golden travel small logo"></a>
 
       <!-- Hamburger menu for phones -->
-      <button title="Open and close navigation bar"
+      <button title="Open and close navigation bar" name="hamburger-menu"
         class="hamburger-menu"><span></span><span></span><span></span></button>
       <a href="../about/">About</a><a href="../destinations/">Destinations</a><a href="../history/">My history</a>
     </nav>
@@ -36,7 +36,7 @@
 
   <!-- Form pages progress bar -->
   <div id="step-indicator">
-    <button id="previous"><img src="../meta-images/leftarrow.png" alt=""></button>
+    <button id="previous" name="previous" aria-label="previous"><img src="../meta-images/leftarrow.png" alt=""></button>
     <button text="1" class="step active" id="step-1">
       1
     </button>
@@ -48,7 +48,7 @@
     <button text="3" class="step" id="step-3">
       3
     </button>
-    <button id="next"><img src="../meta-images/rightarrow.png" alt=""></button>
+    <button id="next" name="next" aria-label="next"><img src="../meta-images/rightarrow.png" alt=""></button>
   </div>
 
   <!-- Travel destination selection -->
@@ -96,17 +96,20 @@
         <div>
           <label for="first-name">First name</label>
           <span class="req">*</span>
-          <input placeholder="Type to begin..." type="text" name="first-name" id="first-name" required>
+          <input placeholder="Type to begin..." type="text" name="first-name" id="first-name" required
+            aria-required="true">
         </div>
         <div>
           <label for="last-name">Last name</label>
           <span class="req">*</span>
-          <input placeholder="Type to begin..." type="text" name="last-name" id="last-name" required>
+          <input placeholder="Type to begin..." type="text" name="last-name" id="last-name" required
+            aria-required="true">
         </div>
         <div>
           <label for="age">Age</label>
           <span class="req">*</span>
-          <input placeholder="Type to begin..." type="number" name="age" min="18" id="age" required>
+          <input placeholder="Type to begin..." type="number" name="age" min="18" id="age" required
+            aria-required="true">
         </div>
       </fieldset>
 
@@ -116,13 +119,14 @@
         <div>
           <label for="email">Email</label>
           <span class="req">*</span>
-          <input placeholder="just.example@gmail.com" type="email" name="email" id="email" required>
+          <input placeholder="just.example@gmail.com" type="email" name="email" id="email" required
+            aria-required="true">
         </div>
         <div>
           <label for="phone-number">Phone number</label>
           <span class="req">*</span>
           <input placeholder="Type to begin..." type="tel" name="phone-number" id="phone-number" minlength="7"
-            maxlength="15" required>
+            maxlength="15" required aria-required="true">
         </div>
       </fieldset>
 
@@ -137,22 +141,24 @@
         <div>
           <label for="card-name">Card holder name</label>
           <span class="req">*</span>
-          <input placeholder="Type to begin..." type="text" name="card-name" id="card-name">
+          <input placeholder="Type to begin..." type="text" name="card-name" id="card-name" required
+            aria-required="true">
         </div>
         <div>
           <label for="card-number">Card number</label>
           <span class="req">*</span>
-          <input placeholder="XXXX XXXX XXXX XXXX" type="number" name="card-number" id="card-number" required>
+          <input placeholder="XXXX XXXX XXXX XXXX" type="number" name="card-number" id="card-number" required
+            aria-required="true">
         </div>
         <div>
           <label for="ccv">Card CCV</label>
           <span class="req">*</span>
-          <input placeholder="XXXX" type="number" id="ccv" name="ccv" required>
+          <input placeholder="XXXX" type="number" id="ccv" name="ccv" required aria-required="true">
         </div>
         <div>
           <label for="expires">Expiration date</label>
           <span class="req">*</span>
-          <input placeholder="MM/YY" type="text" name="expires" id="expires" required>
+          <input placeholder="MM/YY" type="text" name="expires" id="expires" required aria-required="true">
         </div>
       </fieldset>
 
@@ -169,9 +175,9 @@
   <footer>
     <div class="contact">
       <h2>Contact</h2>
-      <a href="tel+46737574755" class="p1">+46 73 757 47 55</a>
+      <a href="tel:+46737574755" class="p1">+46 73 757 47 55</a>
       <a href="mailto:contact@goldentravel.com" class="p2">contact@goldentravel.com</a>
-      <a class="p3">34st golden street 16795</a>
+      <a href="geo:49.2651881,-122.959521" class="p3">34st golden street 16795</a>
     </div>
     <div class="creator">
       <h2>Creator</h2>
