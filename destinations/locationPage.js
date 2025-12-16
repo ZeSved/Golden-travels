@@ -24,6 +24,9 @@ const title = document.getElementById('title')
 // Keeps track of currently shown parts of progress bar
 const currentlyActive = ['step_1']
 
+// Google maps API key
+const mapsKey = 'AIzaSyBJJNyhCEg8sxLsO6YMZ-GMFTT-c5-Cz_Q' // Removed from Google, so does not work
+
 // Decides which part of the progress bar should be active and what page should be active
 const classToggles = {
 	progressBar: [
@@ -91,8 +94,8 @@ Array.from(steps).forEach((s) => {
 })
 
 // Inital map src set
-cityMap.src = `https://www.google.com/maps/embed/v1/place?key=AIzaSyBJJNyhCEg8sxLsO6YMZ-GMFTT-c5-Cz_Q&q=stockholm`
-hotelMap.src = `https://www.google.com/maps/embed/v1/place?key=AIzaSyBJJNyhCEg8sxLsO6YMZ-GMFTT-c5-Cz_Q&q=grand+hotel`
+cityMap.src = `https://www.google.com/maps/embed/v1/place?key=${mapsKey}&q=stockholm`
+hotelMap.src = `https://www.google.com/maps/embed/v1/place?key=${mapsKey}&q=grand+hotel`
 
 // Function to update the maps
 function updateMaps(e, map) {
@@ -100,7 +103,7 @@ function updateMaps(e, map) {
 	;(map === 'city'
 		? cityMap
 		: hotelMap
-	).src = `https://www.google.com/maps/embed/v1/place?key=AIzaSyBJJNyhCEg8sxLsO6YMZ-GMFTT-c5-Cz_Q&q=${e.currentTarget.value
+	).src = `https://www.google.com/maps/embed/v1/place?key=${mapsKey}&q=${e.currentTarget.value
 		.trim()
 		.replaceAll(' ', '+')}`
 }
